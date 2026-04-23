@@ -9,282 +9,284 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f0f4f8;
+      background: #eef1f5;
       color: #1e293b;
       height: 100vh;
       display: flex;
       overflow: hidden;
     }
 
-    /* ── SIDEBAR ─────────────────────────────────────────────────────── */
+    /* ── SIDEBAR ── */
     .sidebar {
-      width: 210px; min-width: 210px;
-      background: #1b3a5c;
+      width: 208px; min-width: 208px;
+      background: #0f2640;
       display: flex; flex-direction: column;
       height: 100vh; overflow-y: auto;
     }
     .sidebar-logo {
       padding: 18px 16px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .sidebar-logo span { color: #fff; font-size: 19px; font-weight: 700; letter-spacing: -0.3px; }
-    .sidebar-logo span em { color: #4db8ff; font-style: normal; }
-    .sidebar-nav { padding: 6px 0; flex: 1; }
+    .sidebar-logo .logo-text { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+    .sidebar-logo .logo-text em { color: #38bdf8; font-style: normal; }
+    .sidebar-nav { padding: 8px 0; flex: 1; }
     .nav-item {
       display: flex; align-items: center; gap: 9px;
-      padding: 8px 16px;
-      color: rgba(255,255,255,0.65); font-size: 13px; cursor: pointer;
+      padding: 7.5px 16px;
+      color: rgba(255,255,255,0.58); font-size: 13px; cursor: pointer;
       border-left: 3px solid transparent; transition: all 0.12s;
     }
-    .nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
-    .nav-item.active { background: rgba(255,255,255,0.11); color: #fff; border-left-color: #4db8ff; }
-    .nav-icon { width: 16px; text-align: center; font-size: 14px; opacity: 0.8; }
-    .nav-sub { padding-left: 41px; font-size: 12px; }
-    .nav-sub.active-sub { color: #fff; border-left-color: #4db8ff; }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.85); }
+    .nav-item.active { background: rgba(255,255,255,0.08); color: #fff; border-left-color: #38bdf8; }
+    .nav-icon { width: 15px; text-align: center; font-size: 13px; opacity: 0.75; }
+    .nav-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 6px 0; }
+    .nav-sub {
+      padding: 6px 16px 6px 40px;
+      color: rgba(255,255,255,0.45); font-size: 12px; cursor: pointer;
+    }
+    .nav-sub:hover { color: rgba(255,255,255,0.75); }
+    .nav-sub.active-sub { color: #38bdf8; }
 
-    /* ── MAIN ────────────────────────────────────────────────────────── */
-    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    /* ── MAIN ── */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
     .topbar {
       background: #fff; border-bottom: 1px solid #e2e8f0;
-      padding: 0 22px; height: 50px;
+      padding: 0 24px; height: 50px;
       display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
     }
-    .topbar h1 { font-size: 16px; font-weight: 600; color: #0f172a; }
-    .topbar-right { display: flex; align-items: center; gap: 12px; color: #64748b; font-size: 13px; }
+    .topbar h1 { font-size: 15px; font-weight: 600; color: #0f172a; }
+    .topbar-right { display: flex; align-items: center; gap: 14px; color: #94a3b8; font-size: 14px; }
+    .topbar-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #1b3a5c; color: #fff; font-size: 12px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
 
     .page-content {
-      flex: 1; overflow-y: auto;
-      padding: 20px 22px;
+      flex: 1; padding: 20px 24px; overflow: hidden; display: flex; flex-direction: column;
+    }
+
+    /* ── SUBSCRIPTION CARD ── */
+    .sub-card {
+      background: #fff; border-radius: 14px; border: 1px solid #e2e8f0;
+      flex: 1; display: flex; flex-direction: column; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .card-header {
+      padding: 18px 24px 14px; border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
+    }
+    .card-header h2 { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .card-header p { font-size: 12.5px; color: #64748b; margin-top: 2px; }
+
+    .card-body {
+      flex: 1; display: flex; overflow: hidden; min-height: 0;
+      justify-content: center;
+    }
+
+    /* ── COLUMN SHARED ── */
+    .col {
       display: flex; flex-direction: column;
+      padding: 20px; overflow: hidden;
+      flex: 0 0 280px; width: 280px;
+    }
+    .col + .col { border-left: 1px solid #f1f5f9; }
+
+    .col-heading {
+      font-size: 10px; font-weight: 700; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      margin-bottom: 12px; flex-shrink: 0;
     }
 
-    /* ── MAIN PANEL ──────────────────────────────────────────────────── */
-    .sub-panel {
-      background: #fff; border-radius: 12px;
-      border: 1px solid #e2e8f0;
-      display: flex; flex-direction: column;
-      flex: 1; min-height: 0;
-      overflow: hidden;
-    }
-    .sub-panel-header {
-      padding: 16px 20px 12px; border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
-    }
-    .sub-panel-header h2 { font-size: 15px; font-weight: 700; color: #0f172a; }
-    .sub-panel-header p { font-size: 12.5px; color: #64748b; margin-top: 2px; }
+    /* ── COLUMN 1: PLAN SELECTOR ── */
+    .col-plans { gap: 0; }
 
-    .sub-panel-body {
-      display: flex; gap: 0; flex: 1; min-height: 0; overflow: hidden;
-    }
+    .plan-list { display: flex; flex-direction: column; gap: 7px; flex: 1; }
 
-    /* ── LEFT COLUMN ─────────────────────────────────────────────────── */
-    .left-col {
-      flex: 1; min-width: 0;
-      padding: 16px 20px;
-      display: flex; flex-direction: column; gap: 12px;
-      overflow: hidden;
+    .plan-row {
+      display: flex; align-items: center;
+      border: 1.5px solid #e8ecf0; border-radius: 10px;
+      padding: 12px 14px; cursor: pointer; transition: all 0.12s;
+      background: #fafbfc; gap: 12px; flex-shrink: 0;
     }
-
-    .col-label {
-      font-size: 10.5px; font-weight: 700; color: #94a3b8;
-      text-transform: uppercase; letter-spacing: 0.7px;
-    }
-
-    /* Plan grid */
-    .plan-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 8px;
-      flex: 1; min-height: 0;
-    }
-
-    .plan-card {
-      border: 1.5px solid #e2e8f0;
-      border-radius: 10px; padding: 12px 14px;
-      cursor: pointer; transition: all 0.12s;
-      display: flex; flex-direction: column; justify-content: space-between;
-      position: relative; background: #fafafa;
-      min-height: 0;
-    }
-    .plan-card:hover { border-color: #93c5fd; background: #f0f7ff; }
-    .plan-card.selected {
+    .plan-row:hover { border-color: #93c5fd; background: #f5f9ff; }
+    .plan-row.selected {
       border-color: #1b3a5c; background: #f0f5fb;
-      box-shadow: 0 0 0 3px rgba(27,58,92,0.08);
+      box-shadow: 0 0 0 3px rgba(27,58,92,0.06);
     }
 
-    .plan-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .plan-name { font-size: 13px; font-weight: 700; color: #0f172a; }
+    .plan-radio {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid #cbd5e1; flex-shrink: 0; position: relative;
+      transition: all 0.12s;
+    }
+    .plan-row.selected .plan-radio {
+      border-color: #1b3a5c; background: #1b3a5c;
+    }
+    .plan-row.selected .plan-radio::after {
+      content: ''; position: absolute; width: 6px; height: 6px;
+      background: #fff; border-radius: 50%; top: 3px; left: 3px;
+    }
+
+    .plan-info { flex: 1; min-width: 0; }
+    .plan-name-row { display: flex; align-items: center; gap: 7px; }
+    .plan-name { font-size: 13.5px; font-weight: 650; color: #0f172a; }
     .plan-badge {
-      font-size: 9.5px; font-weight: 600; background: #1b3a5c; color: #fff;
-      padding: 2px 7px; border-radius: 20px;
+      font-size: 9px; font-weight: 700; background: #0f2640; color: #fff;
+      padding: 2px 6px; border-radius: 20px; letter-spacing: 0.3px;
     }
-    .plan-price-row { margin-top: 6px; }
-    .plan-price {
-      font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1;
+    .plan-desc { font-size: 11.5px; color: #64748b; margin-top: 2px; }
+
+    .plan-price-col { text-align: right; flex-shrink: 0; }
+    .plan-price { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1; }
+    .plan-price small { font-size: 10.5px; font-weight: 400; color: #94a3b8; }
+    .plan-price-unit { font-size: 10px; color: #94a3b8; margin-top: 1px; }
+
+    /* ── COLUMN 2: CONFIGURE ── */
+    .col-configure { gap: 0; }
+
+    .config-section { margin-bottom: 18px; flex-shrink: 0; }
+    .config-label {
+      font-size: 11.5px; font-weight: 600; color: #374151; margin-bottom: 8px;
     }
-    .plan-price small { font-size: 12px; font-weight: 400; color: #64748b; }
-    .plan-unit { font-size: 11px; color: #94a3b8; margin-top: 1px; }
-    .plan-desc { font-size: 11px; color: #64748b; margin-top: 6px; line-height: 1.35; }
+
+    /* Billing model toggle */
+    .seg-pill {
+      display: flex; background: #f1f5f9; border-radius: 9px; padding: 3px; gap: 3px;
+    }
+    .seg-pill button {
+      flex: 1; padding: 8px 12px; border-radius: 7px; border: none;
+      font-size: 12.5px; font-weight: 500; cursor: pointer; transition: all 0.14s;
+      color: #64748b; background: transparent;
+    }
+    .seg-pill button.active {
+      background: #fff; color: #0f172a; font-weight: 600;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04);
+    }
+    .config-hint { font-size: 11px; color: #94a3b8; margin-top: 6px; }
 
     /* Count stepper */
-    .count-box {
-      background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 10px; padding: 10px 14px;
-      display: flex; align-items: center; gap: 12px;
-      flex-shrink: 0;
-    }
-    .count-label-col { flex: 1; min-width: 0; }
-    .count-label-col .col-label { margin-bottom: 1px; }
-    .count-subtext { font-size: 11px; color: #94a3b8; }
+    .stepper-row { display: flex; align-items: center; gap: 12px; }
     .stepper {
-      display: flex; align-items: center; gap: 0;
-      border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden;
+      display: flex; align-items: center;
+      border: 1.5px solid #e2e8f0; border-radius: 8px; overflow: hidden;
+      background: #fff;
     }
     .stepper button {
-      width: 32px; height: 32px; border: none;
-      background: #fff; font-size: 18px; cursor: pointer; color: #374151;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.1s;
+      width: 34px; height: 34px; border: none; background: transparent;
+      font-size: 18px; color: #374151; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: background 0.1s;
     }
-    .stepper button:hover:not(:disabled) { background: #f1f5f9; }
+    .stepper button:hover:not(:disabled) { background: #f8fafc; }
     .stepper button:disabled { color: #cbd5e1; cursor: not-allowed; }
-    .count-display {
-      width: 44px; text-align: center; font-size: 15px; font-weight: 700;
-      color: #0f172a; border-left: 1.5px solid #cbd5e1; border-right: 1.5px solid #cbd5e1;
-      height: 32px; display: flex; align-items: center; justify-content: center;
+    .count-val {
+      width: 42px; text-align: center; font-size: 15px; font-weight: 700; color: #0f172a;
+      border-left: 1.5px solid #e2e8f0; border-right: 1.5px solid #e2e8f0;
+      height: 34px; display: flex; align-items: center; justify-content: center;
     }
-    .count-rate { font-size: 12px; font-weight: 600; color: #374151; }
+    .stepper-meta { flex: 1; }
+    .stepper-rate { font-size: 12.5px; font-weight: 600; color: #0f172a; }
+    .stepper-note { font-size: 11px; color: #94a3b8; margin-top: 2px; }
 
-    /* Enterprise callout */
-    .ent-callout {
-      display: none; background: #f0f5ff; border: 1px solid #bfdbfe;
-      border-radius: 10px; padding: 14px 16px; text-align: center;
+    /* Annual toggle */
+    .annual-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      padding: 12px 14px;
     }
-    .ent-callout.show { display: block; }
-    .ent-callout strong { font-size: 13px; color: #1e40af; }
-    .ent-callout p { font-size: 12px; color: #3b82f6; margin-top: 4px; }
-
-    /* ── RIGHT COLUMN ────────────────────────────────────────────────── */
-    .right-col {
-      width: 268px; min-width: 268px; flex-shrink: 0;
-      border-left: 1px solid #f1f5f9;
-      background: #f8fafc;
-      padding: 16px;
-      display: flex; flex-direction: column; gap: 10px;
-      overflow-y: auto;
-    }
-
-    /* Billing mode segmented control */
-    .seg-control {
-      display: flex; background: #e2e8f0; border-radius: 8px; padding: 3px; gap: 2px;
-    }
-    .seg-control button {
-      flex: 1; padding: 6px 8px; border-radius: 6px; border: none;
-      font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.12s;
-      color: #64748b; background: transparent; white-space: nowrap;
-    }
-    .seg-control button.active {
-      background: #1b3a5c; color: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    }
-    .mode-hint { font-size: 11px; color: #94a3b8; margin-top: 4px; }
-
-    /* Annual toggle row */
-    .annual-row {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
-      padding: 9px 12px;
-    }
-    .annual-row-label { font-size: 12.5px; font-weight: 600; color: #374151; }
-    .annual-row-sub { font-size: 11px; color: #15803d; margin-top: 1px; }
-    .switch { position: relative; width: 36px; height: 20px; display: inline-block; flex-shrink: 0; }
+    .annual-card-left { min-width: 0; flex: 1; }
+    .annual-card-title { font-size: 13px; font-weight: 600; color: #0f172a; }
+    .annual-card-sub { font-size: 11px; color: #16a34a; margin-top: 2px; line-height: 1.35; }
+    .switch { position: relative; width: 38px; height: 21px; display: inline-block; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .switch-track {
       position: absolute; inset: 0; background: #cbd5e1;
-      border-radius: 20px; cursor: pointer; transition: background 0.18s;
+      border-radius: 21px; cursor: pointer; transition: background 0.2s;
     }
     .switch input:checked + .switch-track { background: #1b3a5c; }
     .switch-thumb {
-      position: absolute; width: 14px; height: 14px;
-      left: 3px; top: 3px; background: #fff; border-radius: 50%;
-      transition: transform 0.18s; pointer-events: none;
+      position: absolute; width: 15px; height: 15px; left: 3px; top: 3px;
+      background: #fff; border-radius: 50%; transition: transform 0.2s; pointer-events: none;
     }
-    .switch input:checked ~ .switch-thumb { transform: translateX(16px); }
+    .switch input:checked ~ .switch-thumb { transform: translateX(17px); }
 
-    /* Divider */
-    .divider { height: 1px; background: #e2e8f0; flex-shrink: 0; }
-
-    /* Order summary */
-    .summary-rows { display: flex; flex-direction: column; gap: 6px; }
-    .sum-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      font-size: 12.5px;
+    /* Enterprise callout */
+    .ent-callout {
+      display: none; background: #eff6ff; border: 1.5px solid #bfdbfe;
+      border-radius: 10px; padding: 16px; text-align: center; margin-top: auto;
     }
-    .sum-row .lbl { color: #64748b; }
-    .sum-row .val { font-weight: 600; color: #0f172a; }
-    .sum-row .val.highlight { color: #1b3a5c; }
+    .ent-callout.show { display: block; }
+    .ent-callout strong { font-size: 13px; color: #1d4ed8; display: block; margin-bottom: 4px; }
+    .ent-callout p { font-size: 12px; color: #3b82f6; line-height: 1.4; }
 
-    .total-block {
+    /* ── COLUMN 3: SUMMARY ── */
+    .col-summary { background: #f8fafc; overflow-y: auto; }
+
+    .summary-rows { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+    .sum-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .sum-lbl { font-size: 12.5px; color: #64748b; }
+    .sum-val { font-size: 12.5px; font-weight: 600; color: #0f172a; }
+    .sum-val.accent { color: #1b3a5c; }
+
+    .total-card {
       background: #fff; border: 1.5px solid #e2e8f0; border-radius: 10px;
-      padding: 12px 14px;
+      padding: 14px; margin: 14px 0 0; flex-shrink: 0;
     }
-    .total-lbl { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
-    .total-amount {
-      font-size: 28px; font-weight: 800; color: #0f172a;
-      display: flex; align-items: baseline; gap: 5px; margin-top: 3px;
+    .total-eyebrow { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.7px; }
+    .total-number {
+      font-size: 30px; font-weight: 800; color: #0f172a;
+      display: flex; align-items: baseline; gap: 5px; margin-top: 4px; line-height: 1;
     }
-    .total-amount small { font-size: 13px; font-weight: 400; color: #64748b; }
-    .total-note { font-size: 11px; color: #64748b; margin-top: 4px; }
+    .total-number small { font-size: 13px; font-weight: 400; color: #94a3b8; }
+    .total-note { font-size: 11px; color: #64748b; margin-top: 6px; }
 
-    /* Features */
-    .feat-section { flex: 1; min-height: 0; overflow: hidden; }
-    .feat-title { font-size: 11.5px; font-weight: 700; color: #374151; margin-bottom: 6px; }
-    .feat-list { display: flex; flex-direction: column; gap: 4px; overflow-y: auto; max-height: 130px; }
-    .feat-item {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 11.5px; color: #475569;
-    }
-    .tick { color: #16a34a; font-size: 12px; flex-shrink: 0; }
+    .divider { height: 1px; background: #e8ecf0; flex-shrink: 0; margin: 14px 0; }
 
-    /* CTA */
+    .inclusions-title { font-size: 11.5px; font-weight: 700; color: #374151; margin-bottom: 8px; flex-shrink: 0; }
+    .inclusions-list { display: flex; flex-direction: column; gap: 5px; }
+    .incl-item { display: flex; align-items: flex-start; gap: 7px; font-size: 11.5px; color: #475569; }
+    .incl-tick { color: #16a34a; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+
+    .cta-wrap { flex-shrink: 0; margin-top: 14px; }
     .cta-btn {
-      width: 100%; padding: 11px;
+      width: 100%; padding: 12px; border: none; border-radius: 9px;
+      font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.14s;
       background: #1b3a5c; color: #fff;
-      border: none; border-radius: 8px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      transition: background 0.12s; flex-shrink: 0;
     }
-    .cta-btn:hover { background: #16304d; }
-    .cta-btn.ent { background: #0369a1; }
-    .cta-btn.ent:hover { background: #0c5a8a; }
-
-    .no-lock { font-size: 11px; color: #94a3b8; text-align: center; flex-shrink: 0; }
+    .cta-btn:hover { background: #162f4a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(27,58,92,0.25); }
+    .cta-btn.ent { background: #1d4ed8; }
+    .cta-btn.ent:hover { background: #1a44c0; box-shadow: 0 4px 12px rgba(29,78,216,0.3); }
+    .no-lock { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 8px; }
 
     /* Legal */
-    .legal {
-      padding: 10px 20px 14px; border-top: 1px solid #f1f5f9;
+    .card-footer {
+      border-top: 1px solid #f1f5f9; padding: 10px 24px;
       font-size: 11px; color: #94a3b8; line-height: 1.5; flex-shrink: 0;
     }
-    .legal a { color: #3b82f6; text-decoration: none; }
+    .card-footer a { color: #3b82f6; text-decoration: none; }
   </style>
 </head>
 <body>
 
-<!-- ── SIDEBAR ── -->
+<!-- SIDEBAR -->
 <nav class="sidebar">
-  <div class="sidebar-logo"><span>Shift<em>Care</em></span></div>
+  <div class="sidebar-logo">
+    <span class="logo-text">Shift<em>Care</em></span>
+  </div>
   <div class="sidebar-nav">
-    <div class="nav-item"><span class="nav-icon">⊞</span>Dashboard</div>
-    <div class="nav-item"><span class="nav-icon">📅</span>Scheduler</div>
-    <div class="nav-item"><span class="nav-icon">💬</span>Messages</div>
-    <div class="nav-item"><span class="nav-icon">👤</span>Staff</div>
-    <div class="nav-item"><span class="nav-icon">🧑</span>Clients</div>
-    <div class="nav-item"><span class="nav-icon">⏱</span>Timesheets</div>
-    <div class="nav-item"><span class="nav-icon">📄</span>Invoices</div>
-    <div class="nav-item"><span class="nav-icon">📋</span>Forms</div>
-    <div class="nav-item"><span class="nav-icon">📊</span>Reports</div>
-    <div class="nav-item"><span class="nav-icon">🎓</span>Certifications</div>
-    <div class="nav-item" style="margin-top:8px;"><span class="nav-icon">⚙️</span>Account</div>
+    <div class="nav-item"><span class="nav-icon">⊞</span> Dashboard</div>
+    <div class="nav-item"><span class="nav-icon">📅</span> Scheduler</div>
+    <div class="nav-item"><span class="nav-icon">💬</span> Messages</div>
+    <div class="nav-item"><span class="nav-icon">👤</span> Staff</div>
+    <div class="nav-item"><span class="nav-icon">🧑</span> Clients</div>
+    <div class="nav-item"><span class="nav-icon">⏱</span> Timesheets</div>
+    <div class="nav-item"><span class="nav-icon">📄</span> Invoices</div>
+    <div class="nav-item"><span class="nav-icon">📋</span> Forms</div>
+    <div class="nav-item"><span class="nav-icon">📊</span> Reports</div>
+    <div class="nav-item"><span class="nav-icon">🎓</span> Certifications</div>
+    <div class="nav-divider"></div>
+    <div class="nav-item"><span class="nav-icon">⚙️</span> Account</div>
     <div class="nav-sub">Settings</div>
     <div class="nav-sub">AI Services</div>
     <div class="nav-sub">Features</div>
@@ -292,192 +294,213 @@
     <div class="nav-sub">Invoice Config</div>
     <div class="nav-sub">Smart Alerts</div>
     <div class="nav-sub">Email</div>
-    <div class="nav-sub active-sub nav-item active">Subscription</div>
+    <div class="nav-sub active-sub">Subscription</div>
     <div class="nav-sub">Integrations</div>
   </div>
 </nav>
 
-<!-- ── MAIN ── -->
+<!-- MAIN -->
 <div class="main">
   <div class="topbar">
     <h1>Subscription</h1>
     <div class="topbar-right">
-      <span>🔍</span><span>❓</span><span>🔔</span>
-      <span style="font-weight:600; color:#1e293b;">Kirti</span>
+      <span>🔍</span>
+      <span>❓</span>
+      <span>🔔</span>
+      <div class="topbar-avatar">K</div>
     </div>
   </div>
 
   <div class="page-content">
-    <div class="sub-panel">
+    <div class="sub-card">
 
-      <div class="sub-panel-header">
+      <div class="card-header">
         <h2>Your Subscription</h2>
-        <p>Choose a plan and billing model. Changes take effect at the next billing cycle.</p>
+        <p>Choose a plan and billing model. Changes take effect at your next billing cycle.</p>
       </div>
 
-      <div class="sub-panel-body">
+      <div class="card-body">
 
-        <!-- ── LEFT COLUMN ── -->
-        <div class="left-col">
+        <!-- ── COL 1: PLAN SELECTOR ── -->
+        <div class="col col-plans">
+          <div class="col-heading">Select plan</div>
+          <div class="plan-list">
 
-          <div class="col-label">Select plan</div>
-
-          <div class="plan-grid">
-
-            <!-- Premium — top left -->
-            <div class="plan-card selected" id="card-premium" onclick="selectPlan('premium')">
-              <div class="plan-card-top">
-                <div class="plan-name">Premium</div>
-                <div class="plan-badge">Popular</div>
+            <div class="plan-row selected" id="card-premium" onclick="selectPlan('premium')">
+              <div class="plan-radio"></div>
+              <div class="plan-info">
+                <div class="plan-name-row">
+                  <span class="plan-name">Premium</span>
+                  <span class="plan-badge">Popular</span>
+                </div>
+                <div class="plan-desc">AI tools, medication tracking &amp; family portal</div>
               </div>
-              <div class="plan-price-row">
+              <div class="plan-price-col">
                 <div class="plan-price" id="rate-premium">$25<small>/mo</small></div>
-                <div class="plan-unit" id="unit-premium">per staff</div>
+                <div class="plan-price-unit" id="unit-premium">per staff</div>
               </div>
-              <div class="plan-desc">AI tools, medication tracking &amp; family portal</div>
             </div>
 
-            <!-- Professional — top right -->
-            <div class="plan-card" id="card-professional" onclick="selectPlan('professional')">
-              <div class="plan-card-top">
-                <div class="plan-name">Professional</div>
+            <div class="plan-row" id="card-professional" onclick="selectPlan('professional')">
+              <div class="plan-radio"></div>
+              <div class="plan-info">
+                <div class="plan-name-row">
+                  <span class="plan-name">Professional</span>
+                </div>
+                <div class="plan-desc">Forms, progress notes &amp; API access</div>
               </div>
-              <div class="plan-price-row">
+              <div class="plan-price-col">
                 <div class="plan-price" id="rate-professional">$15<small>/mo</small></div>
-                <div class="plan-unit" id="unit-professional">per staff</div>
+                <div class="plan-price-unit" id="unit-professional">per staff</div>
               </div>
-              <div class="plan-desc">Forms, progress notes &amp; API access</div>
             </div>
 
-            <!-- Basic — bottom left -->
-            <div class="plan-card" id="card-basic" onclick="selectPlan('basic')">
-              <div class="plan-card-top">
-                <div class="plan-name">Basic</div>
+            <div class="plan-row" id="card-basic" onclick="selectPlan('basic')">
+              <div class="plan-radio"></div>
+              <div class="plan-info">
+                <div class="plan-name-row">
+                  <span class="plan-name">Basic</span>
+                </div>
+                <div class="plan-desc">Scheduling, client management &amp; invoicing</div>
               </div>
-              <div class="plan-price-row">
+              <div class="plan-price-col">
                 <div class="plan-price" id="rate-basic">$9<small>/mo</small></div>
-                <div class="plan-unit" id="unit-basic">per staff</div>
+                <div class="plan-price-unit" id="unit-basic">per staff</div>
               </div>
-              <div class="plan-desc">Scheduling, clients &amp; invoicing</div>
             </div>
 
-            <!-- Enterprise — bottom right -->
-            <div class="plan-card" id="card-enterprise" onclick="selectPlan('enterprise')">
-              <div class="plan-card-top">
-                <div class="plan-name">Enterprise</div>
+            <div class="plan-row" id="card-enterprise" onclick="selectPlan('enterprise')">
+              <div class="plan-radio"></div>
+              <div class="plan-info">
+                <div class="plan-name-row">
+                  <span class="plan-name">Enterprise</span>
+                </div>
+                <div class="plan-desc">Custom contract, SLA &amp; dedicated support</div>
               </div>
-              <div class="plan-price-row">
-                <div class="plan-price" style="font-size:17px; padding-top:3px;">Custom</div>
-                <div class="plan-unit">pricing on request</div>
+              <div class="plan-price-col">
+                <div class="plan-price" style="font-size:13px; padding-top:2px;">Custom</div>
+                <div class="plan-price-unit">on request</div>
               </div>
-              <div class="plan-desc">Custom contract, SLA &amp; dedicated support</div>
             </div>
 
-          </div><!-- /.plan-grid -->
-
-          <!-- Count stepper -->
-          <div class="count-box" id="count-box">
-            <div class="count-label-col">
-              <div class="col-label" id="count-section-label">Staff licences</div>
-              <div class="count-subtext" id="count-note">Minimum 5 staff licences</div>
-            </div>
-            <div class="stepper">
-              <button id="btn-minus" onclick="adj(-1)" disabled>−</button>
-              <div class="count-display" id="count-val">5</div>
-              <button onclick="adj(1)">+</button>
-            </div>
-            <div class="count-rate" id="count-rate">$20.00 / staff / mo</div>
           </div>
+        </div>
 
-          <!-- Enterprise callout -->
-          <div class="ent-callout" id="ent-callout">
-            <strong>Enterprise pricing is custom</strong>
-            <p>Contact our sales team for a quote, volume discounts and dedicated onboarding.</p>
-          </div>
-
-        </div><!-- /.left-col -->
-
-        <!-- ── RIGHT COLUMN ── -->
-        <div class="right-col">
+        <!-- ── COL 2: CONFIGURE ── -->
+        <div class="col col-configure">
+          <div class="col-heading">Configure</div>
 
           <!-- Billing model -->
-          <div>
-            <div class="col-label" style="margin-bottom:6px;">Billing model</div>
-            <div class="seg-control">
+          <div class="config-section">
+            <div class="config-label">Billing model</div>
+            <div class="seg-pill">
               <button id="btn-staff" class="active" onclick="setMode('staff')">Staff billing</button>
               <button id="btn-client" onclick="setMode('client')">Client billing</button>
             </div>
-            <p class="mode-hint" id="mode-hint">Charged per staff licence · minimum 5</p>
+            <p class="config-hint" id="mode-hint">Charged per staff licence · minimum 5</p>
           </div>
 
-          <!-- Annual toggle -->
-          <div class="annual-row">
-            <div>
-              <div class="annual-row-label">Annual billing</div>
-              <div class="annual-row-sub">Save 20% vs monthly</div>
+          <!-- Count -->
+          <div class="config-section" id="count-section">
+            <div class="config-label" id="count-label">Number of staff</div>
+            <div class="stepper-row">
+              <div class="stepper">
+                <button id="btn-minus" onclick="adj(-1)" disabled>−</button>
+                <div class="count-val" id="count-val">5</div>
+                <button onclick="adj(1)">+</button>
+              </div>
+              <div class="stepper-meta">
+                <div class="stepper-rate" id="count-rate">$20.00 / staff / mo</div>
+                <div class="stepper-note" id="count-note">Minimum 5 staff</div>
+              </div>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="annual-chk" checked onchange="update()">
-              <span class="switch-track"></span>
-              <span class="switch-thumb"></span>
-            </label>
+          </div>
+
+          <!-- Annual billing -->
+          <div class="config-section" id="annual-section">
+            <div class="config-label">Billing cycle</div>
+            <div class="annual-card">
+              <div class="annual-card-left">
+                <div class="annual-card-title">Annual billing</div>
+                <div class="annual-card-sub" id="annual-sub">Save up to 20% · billed once per year</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="annual-chk" checked onchange="update()">
+                <span class="switch-track"></span>
+                <span class="switch-thumb"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Enterprise callout in col 2 -->
+          <div class="ent-callout" id="ent-callout">
+            <strong>Enterprise pricing is custom</strong>
+            <p>Contact our sales team for a quote, volume discounts, and dedicated onboarding support.</p>
+          </div>
+
+        </div>
+
+        <!-- ── COL 3: SUMMARY ── -->
+        <div class="col col-summary">
+          <div class="col-heading">Order summary</div>
+
+          <!-- Summary rows (hidden for enterprise) -->
+          <div id="summary-rows">
+            <div class="summary-rows">
+              <div class="sum-row">
+                <span class="sum-lbl" id="os-plan">Premium plan</span>
+                <span class="sum-val accent" id="os-rate">$20.00 / staff</span>
+              </div>
+              <div class="sum-row">
+                <span class="sum-lbl">Billing cycle</span>
+                <span class="sum-val" id="os-cycle">Annually</span>
+              </div>
+              <div class="sum-row">
+                <span class="sum-lbl" id="os-count-lbl">Staff licences</span>
+                <span class="sum-val" id="os-count-val">5 × $20.00</span>
+              </div>
+            </div>
+
+            <div class="total-card">
+              <div class="total-eyebrow">Monthly total</div>
+              <div class="total-number">
+                <span id="os-total">$100</span>
+                <small>/ mo</small>
+              </div>
+              <div class="total-note" id="os-note">Billed annually. Cancel anytime.</div>
+            </div>
+          </div>
+
+          <!-- Enterprise summary -->
+          <div id="ent-summary" style="display:none;">
+            <div class="total-card" style="text-align:center; padding: 18px;">
+              <div class="total-eyebrow">Pricing</div>
+              <div style="font-size:20px; font-weight:800; color:#0f172a; margin-top:6px;">Custom</div>
+              <div class="total-note" style="margin-top:8px;">Our team will provide a tailored quote based on your organisation's needs.</div>
+            </div>
           </div>
 
           <div class="divider"></div>
 
-          <!-- Order summary rows -->
-          <div class="summary-rows" id="summary-box">
-            <div class="sum-row">
-              <span class="lbl" id="os-plan">Premium plan</span>
-              <span class="val highlight" id="os-rate">$20 / staff</span>
-            </div>
-            <div class="sum-row">
-              <span class="lbl">Billing cycle</span>
-              <span class="val" id="os-cycle">Annually</span>
-            </div>
-            <div class="sum-row">
-              <span class="lbl" id="os-count-lbl">Staff licences</span>
-              <span class="val" id="os-count-val">5 × $20.00</span>
-            </div>
+          <div class="inclusions-title" id="feat-title">Premium includes</div>
+          <div class="inclusions-list" id="feat-list"></div>
+
+          <div class="cta-wrap">
+            <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
+            <p class="no-lock">No lock-in &nbsp;·&nbsp; No setup fees</p>
           </div>
 
-          <!-- Enterprise summary (hidden by default) -->
-          <div style="display:none;" id="ent-summary">
-            <div class="feat-title">Enterprise includes</div>
-            <div class="feat-list" id="ent-feat-list"></div>
-          </div>
+        </div>
 
-          <!-- Total -->
-          <div class="total-block" id="total-block">
-            <div class="total-lbl">Monthly total</div>
-            <div class="total-amount">
-              <span id="os-total">$100</span>
-              <small>+ GST</small>
-            </div>
-            <div class="total-note" id="os-note">Billed annually. Cancel anytime.</div>
-          </div>
+      </div><!-- /.card-body -->
 
-          <!-- Features -->
-          <div class="feat-section" id="feat-section">
-            <div class="feat-title" id="feat-title">Premium includes</div>
-            <div class="feat-list" id="feat-list"></div>
-          </div>
-
-          <!-- CTA -->
-          <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
-          <p class="no-lock">No lock-in · No setup fees</p>
-
-        </div><!-- /.right-col -->
-
-      </div><!-- /.sub-panel-body -->
-
-      <div class="legal">
-        By purchasing, you agree to our <a href="#">Terms of Service</a> and authorise ShiftCare to charge your nominated payment method. Subscriptions renew automatically. Cancel anytime.
+      <div class="card-footer">
+        By purchasing, you agree to our <a href="#">Terms of Service</a> and authorize ShiftCare to charge your payment method. All prices in USD. Subscriptions renew automatically. Cancel anytime.
       </div>
 
-    </div><!-- /.sub-panel -->
-  </div><!-- /.page-content -->
-</div><!-- /.main -->
+    </div><!-- /.sub-card -->
+  </div>
+</div>
 
 <script>
 const PLANS = {
@@ -485,25 +508,25 @@ const PLANS = {
     name: 'Basic',
     staff:  { mo: 9,  ann: 8  },
     client: { mo: 9,  ann_yr: 84,  ann_mo: 7  },
-    feats: ['Scheduling & rostering','Client management','Timesheets & payroll','Invoicing & billing','Mobile app','Basic reporting']
+    feats: ['Staff scheduling & rostering','Caregiver mobile app','Time & attendance tracking','Manage team availability','Progress notes','Client management']
   },
   professional: {
     name: 'Professional',
     staff:  { mo: 15, ann: 13 },
     client: { mo: 15, ann_yr: 144, ann_mo: 12 },
-    feats: ['Everything in Basic','Custom forms & templates','Progress notes','Incident reporting','API access','Advanced reporting','Priority support']
+    feats: ['Everything in Basic','Generate invoices','Job board','Advanced staff rostering','Teams & group management','Reporting & analytics']
   },
   premium: {
     name: 'Premium',
     staff:  { mo: 25, ann: 20 },
     client: { mo: 20, ann_yr: 192, ann_mo: 16 },
-    feats: ['Everything in Professional','Care plans & goals','Advanced incident management','eMAR medication tracking','Funds management & alerts','NDIS funding period management','AI shift summaries','Family portal']
+    feats: ['Everything in Professional','Custom forms','Advanced incident management','Client signatures','Publish shifts','Track client funds','EVV-ready']
   },
   enterprise: {
     name: 'Enterprise',
     staff:  { mo: null, ann: null },
     client: { mo: null, ann_yr: null, ann_mo: null },
-    feats: ['Everything in Premium','Custom contract & SLA','Dedicated account manager','Volume discounts','Custom integrations','SSO & advanced security']
+    feats: ['Everything in Premium','Advanced workforce management','Custom pay rules & agreements','Multi-entity account hierarchy','Franchise & group configuration','Single Sign-On (SSO)','Open API + payroll & EVV integrations','Dedicated Customer Success Manager']
   }
 };
 
@@ -521,14 +544,13 @@ function setMode(m) {
   document.getElementById('mode-hint').textContent = m === 'staff'
     ? 'Charged per staff licence · minimum 5'
     : 'Charged per active client · minimum 5';
-  count = Math.max(count, MIN);
   update();
 }
 
 function selectPlan(p) {
   plan = p;
   ['basic','professional','premium','enterprise'].forEach(id => {
-    document.getElementById('card-' + id).className = 'plan-card' + (id === p ? ' selected' : '');
+    document.getElementById('card-' + id).className = 'plan-row' + (id === p ? ' selected' : '');
   });
   update();
 }
@@ -540,7 +562,9 @@ function adj(d) {
 }
 
 function featureHTML(list) {
-  return list.map(f => '<div class="feat-item"><span class="tick">✓</span>' + f + '</div>').join('');
+  return list.map(f =>
+    '<div class="incl-item"><span class="incl-tick">✓</span>' + f + '</div>'
+  ).join('');
 }
 
 function update() {
@@ -548,38 +572,47 @@ function update() {
   const isEnt = plan === 'enterprise';
   const d = PLANS[plan];
 
-  // Update rate on all non-enterprise cards
-  ['basic','professional','premium'].forEach(p => {
-    const pd = PLANS[p];
-    const r = mode === 'staff' ? (annual ? pd.staff.ann : pd.staff.mo)
-                               : (annual ? pd.client.ann_mo : pd.client.mo);
-    document.getElementById('rate-' + p).innerHTML = '$' + r + '<small>/mo</small>';
-    document.getElementById('unit-' + p).textContent = mode === 'staff' ? 'per staff' : 'per client';
+  // Update rates on plan cards
+  ['basic','professional','premium'].forEach(k => {
+    const pd = PLANS[k];
+    const r = mode === 'staff'
+      ? (annual ? pd.staff.ann : pd.staff.mo)
+      : (annual ? pd.client.ann_mo : pd.client.mo);
+    document.getElementById('rate-' + k).innerHTML = '$' + r + '<small>/mo</small>';
+    document.getElementById('unit-' + k).textContent = mode === 'staff' ? 'per staff' : 'per client';
   });
 
-  // Show/hide enterprise vs normal
-  document.getElementById('count-box').style.display    = isEnt ? 'none' : '';
-  document.getElementById('ent-callout').className       = 'ent-callout' + (isEnt ? ' show' : '');
-  document.getElementById('summary-box').style.display   = isEnt ? 'none' : '';
-  document.getElementById('total-block').style.display   = isEnt ? 'none' : '';
-  document.getElementById('feat-section').style.display  = isEnt ? 'none' : '';
-  document.getElementById('ent-summary').style.display   = isEnt ? '' : 'none';
+  // Show/hide sections
+  const countSec   = document.getElementById('count-section');
+  const annualSec  = document.getElementById('annual-section');
+  const entCallout = document.getElementById('ent-callout');
+  const summaryRows= document.getElementById('summary-rows');
+  const entSummary = document.getElementById('ent-summary');
+
+  countSec.style.display   = isEnt ? 'none' : '';
+  annualSec.style.display  = isEnt ? 'none' : '';
+  entCallout.className     = 'ent-callout' + (isEnt ? ' show' : '');
+  summaryRows.style.display= isEnt ? 'none' : '';
+  entSummary.style.display = isEnt ? '' : 'none';
 
   const ctaBtn = document.getElementById('cta-btn');
   ctaBtn.textContent = isEnt ? 'Contact sales' : 'Buy ' + d.name + ' plan';
   ctaBtn.className = isEnt ? 'cta-btn ent' : 'cta-btn';
 
-  if (isEnt) {
-    document.getElementById('ent-feat-list').innerHTML = featureHTML(d.feats);
-    return;
-  }
+  document.getElementById('feat-title').textContent = d.name + ' includes';
+  document.getElementById('feat-list').innerHTML = featureHTML(d.feats);
+
+  if (isEnt) return;
 
   count = Math.max(count, MIN);
   document.getElementById('count-val').textContent = count;
   document.getElementById('btn-minus').disabled = count <= MIN;
 
   const unitLabel = mode === 'staff' ? 'Staff licences' : 'Active clients';
-  const unitWord  = mode === 'staff' ? 'staff' : 'client';
+  const unitWord  = mode === 'staff' ? 'staff'          : 'client';
+  const unitLabelSingle = mode === 'staff' ? 'staff' : 'client';
+
+  document.getElementById('count-label').textContent = mode === 'staff' ? 'Number of staff' : 'Number of clients';
 
   let rate, total, rateStr, countValStr, note;
   if (mode === 'staff') {
@@ -594,7 +627,7 @@ function update() {
       total = Math.round(count * rate);
       rateStr = fmt(rate) + ' / client';
       countValStr = count + ' × ' + fmt(rate);
-      note = 'Billed annually at ' + fmt(count * d.client.ann_yr) + ' + GST.';
+      note = 'Billed annually at ' + fmt(count * d.client.ann_yr) + ' / year.';
     } else {
       rate = d.client.mo;
       total = Math.round(count * rate);
@@ -604,23 +637,25 @@ function update() {
     }
   }
 
-  document.getElementById('count-section-label').textContent = unitLabel;
-  document.getElementById('count-rate').textContent = fmt(rate) + ' / ' + unitWord + ' / mo';
-  document.getElementById('count-note').textContent = 'Minimum ' + MIN + ' ' + (mode === 'staff' ? 'staff licences' : 'clients');
-  document.getElementById('os-plan').textContent = d.name + ' plan';
-  document.getElementById('os-rate').textContent = rateStr;
-  document.getElementById('os-cycle').textContent = annual ? 'Annually' : 'Monthly';
-  document.getElementById('os-count-lbl').textContent = unitLabel;
-  document.getElementById('os-count-val').textContent = countValStr;
-  document.getElementById('os-total').textContent = '$' + total.toLocaleString('en-AU');
-  document.getElementById('os-note').textContent = note;
-  document.getElementById('feat-title').textContent = d.name + ' includes';
-  document.getElementById('feat-list').innerHTML = featureHTML(d.feats);
+  const annualSub = annual
+    ? 'Save 20% · billed once per year'
+    : 'Switch to annual and save up to 20%';
+  document.getElementById('annual-sub').textContent = annualSub;
+  document.getElementById('annual-sub').style.color = annual ? '#16a34a' : '#f59e0b';
+
+  document.getElementById('count-rate').textContent = fmt(rate) + ' / ' + unitLabelSingle + ' / mo';
+  document.getElementById('count-note').textContent = 'Minimum ' + MIN + ' ' + (mode === 'staff' ? 'staff' : 'clients');
+  document.getElementById('os-plan').textContent     = d.name + ' plan';
+  document.getElementById('os-rate').textContent     = rateStr;
+  document.getElementById('os-cycle').textContent    = annual ? 'Annually' : 'Monthly';
+  document.getElementById('os-count-lbl').textContent= unitLabel;
+  document.getElementById('os-count-val').textContent= countValStr;
+  document.getElementById('os-total').textContent    = '$' + total.toLocaleString('en-AU');
+  document.getElementById('os-note').textContent     = note;
 }
 
-// Init
 update();
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
