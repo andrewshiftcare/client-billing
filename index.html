@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShiftCare — Subscription</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: #1b3a5c;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sidebar-logo span {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .sidebar-logo span em { color: #4db8ff; font-style: normal; }
+    .sidebar-nav { padding: 8px 0; flex: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px;
+      color: rgba(255,255,255,0.72);
+      font-size: 13.5px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-item.active { background: rgba(255,255,255,0.12); color: #fff; border-left-color: #4db8ff; }
+    .nav-icon { width: 18px; text-align: center; font-size: 15px; opacity: 0.85; }
+    .nav-sub { padding-left: 46px; font-size: 12.5px; }
+    .nav-sub.active-sub { color: #fff; border-left-color: #4db8ff; }
+
+    /* ── MAIN AREA ───────────────────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 24px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .topbar h1 { font-size: 17px; font-weight: 600; color: #1e293b; }
+    .topbar-right { display: flex; align-items: center; gap: 14px; color: #64748b; font-size: 13px; }
+    .impersonate-bar {
+      background: #fef3c7;
+      border-bottom: 1px solid #fbbf24;
+      padding: 6px 24px;
+      font-size: 12px;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stop-btn {
+      background: #dc2626;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .page-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+      position: relative;
+    }
+
+    /* Background subscription info (partially visible) */
+    .bg-subscription {
+      opacity: 0.35;
+      pointer-events: none;
+      user-select: none;
+    }
+    .sub-section { margin-bottom: 20px; }
+    .sub-section label { font-size: 12px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sub-section p { font-size: 14px; color: #1e293b; margin-top: 4px; }
+
+    /* ── MODAL OVERLAY ───────────────────────────────────────────────────── */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15,23,42,0.45);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .modal-header h2 { font-size: 17px; font-weight: 700; color: #0f172a; }
+    .modal-header p { font-size: 13px; color: #64748b; margin-top: 3px; }
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: #f1f5f9;
+      cursor: pointer;
+      font-size: 16px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .close-btn:hover { background: #e2e8f0; }
+
+    /* ── BILLING MODE TOGGLE ─────────────────────────────────────────────── */
+    .billing-mode-section {
+      padding: 14px 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .billing-mode-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+    .billing-toggle {
+      display: inline-flex;
+      background: #e2e8f0;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .billing-toggle button {
+      padding: 7px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s;
+      color: #64748b;
+      background: transparent;
+    }
+    .billing-toggle button.active {
+      background: #1b3a5c;
+      color: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .billing-mode-hint {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 6px;
+    }
+    .billing-mode-hint.highlight { color: #0369a1; }
+
+    /* ── CURRENT PLAN ────────────────────────────────────────────────────── */
+    .current-plan-row {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .current-plan-row span { font-size: 13px; color: #64748b; }
+    .plan-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-chip strong { font-size: 14px; font-weight: 700; color: #0f172a; }
+    .trial-badge {
+      background: #fed7aa;
+      color: #c2410c;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .compare-link { font-size: 12px; color: #3b82f6; cursor: pointer; text-decoration: underline; }
+
+    /* ── PLAN SELECTOR ───────────────────────────────────────────────────── */
+    .section-pad { padding: 16px 24px; }
+    .section-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 10px; }
+
+    .plan-list { display: flex; flex-direction: column; gap: 6px; }
+    .plan-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 2px solid #e2e8f0;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .plan-option:hover { border-color: #94a3b8; }
+    .plan-option.selected { border-color: #1b3a5c; background: #f0f6ff; }
+    .plan-option input[type=radio] { accent-color: #1b3a5c; width: 16px; height: 16px; cursor: pointer; }
+    .plan-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+    .plan-desc { font-size: 12px; color: #64748b; }
+    .popular-badge {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #15803d;
+      color: white;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── COUNT SECTION ───────────────────────────────────────────────────── */
+    .count-section {
+      margin: 0 24px 16px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+    }
+    .count-section-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 10px; }
+    .count-row { display: flex; align-items: center; gap: 14px; }
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .stepper button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      color: #374151;
+      transition: background 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .stepper button:hover { background: #f1f5f9; }
+    .stepper button:first-child { border-radius: 6px 0 0 6px; border-right: none; }
+    .stepper button:last-child { border-radius: 0 6px 6px 0; border-left: none; }
+    .stepper button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .count-display {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      min-width: 48px;
+      text-align: center;
+      border-top: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .count-rate {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1b3a5c;
+    }
+    .count-sublabel { font-size: 12px; color: #64748b; margin-top: 3px; }
+    .count-note { font-size: 11.5px; color: #94a3b8; margin-top: 8px; }
+
+    /* ── PLAN FEATURES ───────────────────────────────────────────────────── */
+    .features-section { padding: 0 24px 16px; }
+    .features-title { font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+    .features-sub { font-size: 12px; color: #64748b; margin-bottom: 10px; }
+    .feature-list { display: flex; flex-direction: column; gap: 5px; }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #374151;
+    }
+    .check { color: #16a34a; font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+    /* ── ORDER SUMMARY ───────────────────────────────────────────────────── */
+    .order-summary {
+      margin: 0 24px 16px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+    }
+    .order-title { font-size: 13px; font-weight: 700; color: #374151; margin-bottom: 10px; }
+    .order-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #374151;
+      margin-bottom: 6px;
+      align-items: center;
+    }
+    .order-row .label { color: #64748b; }
+    .order-row .value { font-weight: 500; }
+    .order-row .value.blue { color: #1d4ed8; }
+    .total-row {
+      border-top: 1px solid #e2e8f0;
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+    .total-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .total-gst { font-size: 13px; color: #94a3b8; margin-left: 4px; }
+    .total-period { font-size: 12px; color: #64748b; margin-top: 2px; }
+    .total-note { font-size: 11.5px; color: #94a3b8; margin-top: 2px; }
+
+    /* ── ANNUAL TOGGLE ───────────────────────────────────────────────────── */
+    .annual-row {
+      margin: 0 24px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #cbd5e1;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .toggle-switch input:checked + .toggle-slider { background: #3b82f6; }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .annual-label { font-size: 13px; color: #374151; }
+    .save-badge {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* ── CTA BUTTON ──────────────────────────────────────────────────────── */
+    .modal-footer { padding: 4px 24px 20px; }
+    .cta-btn {
+      width: 100%;
+      padding: 14px;
+      background: #1b3a5c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.2px;
+    }
+    .cta-btn:hover { background: #264f7a; }
+    .cta-btn.enterprise-btn { background: #64748b; }
+    .cta-btn.enterprise-btn:hover { background: #475569; }
+    .footer-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 8px;
+    }
+    .footer-legal {
+      font-size: 11px;
+      color: #94a3b8;
+      text-align: center;
+      padding: 10px 24px 16px;
+      line-height: 1.5;
+      border-top: 1px solid #f1f5f9;
+    }
+    .footer-legal a { color: #3b82f6; text-decoration: none; }
+
+    /* ── ENTERPRISE CALLOUT ──────────────────────────────────────────────── */
+    .enterprise-info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 0 24px 16px;
+      font-size: 12.5px;
+      color: #1e40af;
+      display: none;
+    }
+    .enterprise-info.show { display: block; }
+    .enterprise-info strong { display: block; margin-bottom: 4px; font-size: 13px; }
+
+    /* ── BREAKEVEN INFO ───────────────────────────────────────────────────── */
+    .breakeven-info {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: -4px 24px 12px;
+      font-size: 12px;
+      color: #166534;
+      display: none;
+    }
+    .breakeven-info.show { display: block; }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span>Shift<em>Care</em></span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-item"><span class="nav-icon">📊</span> Dashboard</div>
+    <div class="nav-item"><span class="nav-icon">📅</span> Scheduler</div>
+    <div class="nav-item"><span class="nav-icon">💬</span> Messages</div>
+    <div class="nav-item"><span class="nav-icon">👥</span> Staff</div>
+    <div class="nav-item"><span class="nav-icon">🧑‍🦽</span> Clients</div>
+    <div class="nav-item"><span class="nav-icon">🕐</span> Timesheets</div>
+    <div class="nav-item"><span class="nav-icon">🧾</span> Invoices</div>
+    <div class="nav-item"><span class="nav-icon">📝</span> Forms</div>
+    <div class="nav-item"><span class="nav-icon">📈</span> Reports</div>
+    <div class="nav-item"><span class="nav-icon">🎓</span> Certifications</div>
+    <div class="nav-item"><span class="nav-icon">⚙️</span> Account</div>
+    <div class="nav-item nav-sub">Settings</div>
+    <div class="nav-item nav-sub">AI Services</div>
+    <div class="nav-item nav-sub">Features</div>
+    <div class="nav-item nav-sub">Family Portal</div>
+    <div class="nav-item nav-sub">Invoice Config</div>
+    <div class="nav-item nav-sub">Smart Alerts</div>
+    <div class="nav-item nav-sub">Email</div>
+    <div class="nav-item nav-sub active active-sub">Subscription</div>
+    <div class="nav-item nav-sub">Integrations</div>
+  </nav>
+</aside>
+
+<!-- ════════════════════ MAIN ════════════════════ -->
+<div class="main">
+  <!-- Top bar -->
+  <div class="topbar">
+    <h1>Subscription</h1>
+    <div class="topbar-right">
+      <span>🔍</span>
+      <span>❓</span>
+      <span>🔔</span>
+      <span style="font-weight:600; color:#1e293b;">Kirti</span>
+    </div>
+  </div>
+
+  <!-- Impersonation bar -->
+  <div class="impersonate-bar">
+    You (<a href="#" style="color:#92400e">andrew@shiftcare.com</a>) are impersonating Kirti Sharma from 'Aanira Care Services'
+    <button class="stop-btn">Stop impersonating</button>
+    <span style="margin-left:auto; color:#b45309;">Your trial expires in 7 days — <strong>upgrade now</strong></span>
+  </div>
+
+  <!-- Page content (blurred background) -->
+  <div class="page-content">
+    <div class="bg-subscription">
+      <div class="sub-section">
+        <label>Current Plan</label>
+        <p>ShiftCare Premium Trials Subscription</p>
+      </div>
+      <div class="sub-section">
+        <label>Billing Period</label>
+        <p>Annually</p>
+      </div>
+    </div>
+
+    <!-- ════════════ MODAL ════════════ -->
+    <div class="modal-overlay">
+      <div class="modal">
+
+        <!-- Header -->
+        <div class="modal-header">
+          <h2>Your Subscription Summary</h2>
+          <p>Review your plan and billing. You can change this anytime.</p>
+          <button class="close-btn" title="Close">✕</button>
+        </div>
+
+        <!-- Billing mode toggle -->
+        <div class="billing-mode-section">
+          <div class="billing-mode-label">Billing model</div>
+          <div class="billing-toggle">
+            <button id="btn-staff" class="active" onclick="setBillingMode('staff')">Staff billing</button>
+            <button id="btn-client" onclick="setBillingMode('client')">Per-client billing</button>
+          </div>
+          <div class="billing-mode-hint" id="mode-hint">
+            Charged per staff licence. Minimum 5 staff.
+          </div>
+        </div>
+
+        <!-- Current plan chip -->
+        <div class="current-plan-row">
+          <span>Current plan</span>
+          <div class="plan-chip">
+            <strong id="current-plan-label">Premium – Trial</strong>
+            <span class="trial-badge">⏱ 7 days remaining</span>
+          </div>
+          <span class="compare-link">ⓘ Compare plans</span>
+        </div>
+
+        <!-- Plan selector -->
+        <div class="section-pad" style="padding-bottom:10px;">
+          <div class="section-label">Select Plan</div>
+          <div class="plan-list">
+            <label class="plan-option" id="opt-basic" onclick="selectPlan('basic')">
+              <input type="radio" name="plan" value="basic" id="r-basic">
+              <div>
+                <div class="plan-name">Basic</div>
+                <div class="plan-desc" id="desc-basic">Core scheduling, clients &amp; timesheets</div>
+              </div>
+            </label>
+            <label class="plan-option" id="opt-professional" onclick="selectPlan('professional')">
+              <input type="radio" name="plan" value="professional" id="r-professional">
+              <div>
+                <div class="plan-name">Professional</div>
+                <div class="plan-desc" id="desc-professional">Forms, progress notes &amp; API access</div>
+              </div>
+            </label>
+            <label class="plan-option selected" id="opt-premium" onclick="selectPlan('premium')">
+              <input type="radio" name="plan" value="premium" id="r-premium" checked>
+              <div>
+                <div class="plan-name">Premium</div>
+                <div class="plan-desc" id="desc-premium">Advanced scheduling and collaboration tools</div>
+              </div>
+              <span class="popular-badge">MOST POPULAR</span>
+            </label>
+            <label class="plan-option" id="opt-enterprise" onclick="selectPlan('enterprise')">
+              <input type="radio" name="plan" value="enterprise" id="r-enterprise">
+              <div>
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-desc">Custom pricing &amp; dedicated support</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Breakeven hint (per-client only) -->
+        <div class="breakeven-info" id="breakeven-info">
+          💡 <strong>Is per-client billing right for you?</strong>
+          Per-client billing saves money when you have more than <strong>0.8 staff per client</strong>
+          (e.g. SIL, residential, or high-needs NDIS care). For community care with many clients per
+          worker, staff billing is typically cheaper.
+        </div>
+
+        <!-- Count section -->
+        <div class="count-section" id="count-section">
+          <div class="count-section-label" id="count-label">Staff licenses</div>
+          <div class="count-row">
+            <div class="stepper">
+              <button id="btn-minus" onclick="adjustCount(-1)">−</button>
+              <div class="count-display" id="count-display">5</div>
+              <button id="btn-plus" onclick="adjustCount(1)">+</button>
+            </div>
+            <div>
+              <div class="count-rate" id="count-rate">$25.00 per staff per month</div>
+              <div class="count-sublabel" id="count-sublabel">You can adjust this anytime as your team grows</div>
+            </div>
+          </div>
+          <div class="count-note" id="count-note">Minimum 5 staff licences.</div>
+        </div>
+
+        <!-- Enterprise callout -->
+        <div class="enterprise-info" id="enterprise-info">
+          <strong>Enterprise pricing is on request</strong>
+          Contact our sales team for a custom quote based on your organisation's size and needs.
+          We offer volume discounts, dedicated onboarding, and a tailored SLA.
+          <br><br>
+          <a href="mailto:sales@shiftcare.com" style="color:#1e40af; font-weight:600;">Contact sales →</a>
+        </div>
+
+        <!-- Plan features -->
+        <div class="features-section" id="features-section">
+          <div class="features-title" id="features-title">Premium Plan Includes</div>
+          <div class="features-sub" id="features-sub">Everything in Professional, plus...</div>
+          <div class="feature-list" id="feature-list"></div>
+        </div>
+
+        <!-- Order summary -->
+        <div class="order-summary" id="order-summary">
+          <div class="order-title">Order Summary</div>
+          <div class="order-row">
+            <span class="label" id="os-plan-label">Premium Plan</span>
+            <span class="value blue" id="os-rate">$25.00 per staff</span>
+          </div>
+          <div class="order-row">
+            <span class="label">Billing cycle</span>
+            <span class="value blue" id="os-cycle">Annually</span>
+          </div>
+          <div class="order-row">
+            <span class="label" id="os-count-label">Staff licences</span>
+            <span class="value" id="os-count-val">5 × $20.00</span>
+          </div>
+          <div class="order-row total-row" style="align-items:flex-start; flex-direction:column; gap:2px;">
+            <span style="font-size:13px; color:#64748b;">Estimated monthly total</span>
+            <div style="display:flex; align-items:baseline; gap:4px;">
+              <span class="total-amount" id="os-total">$100.00</span>
+              <span class="total-gst">+ GST</span>
+            </div>
+            <div class="total-period" id="os-period">per month</div>
+            <div class="total-note" id="os-note">Billed annually. Cancel anytime.</div>
+          </div>
+        </div>
+
+        <!-- Annual toggle -->
+        <div class="annual-row">
+          <label class="toggle-switch">
+            <input type="checkbox" id="annual-toggle" checked onchange="updateSummary()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="annual-label">Switch to Annual Billing to save up to 20%</span>
+          <span class="save-badge" id="save-badge">Save 20%</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="modal-footer">
+          <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
+          <div class="footer-note">No lock in. No setup fees.</div>
+        </div>
+
+        <!-- Legal footer -->
+        <div class="footer-legal">
+          By making this purchase, you agree to our
+          <a href="#">Terms of Service</a> and authorise ShiftCare to charge your
+          nominated payment method. Your subscription will automatically renew.
+          You may cancel anytime.
+        </div>
+
+      </div><!-- /.modal -->
+    </div><!-- /.modal-overlay -->
+  </div><!-- /.page-content -->
+</div><!-- /.main -->
+
+<script>
+// ── DATA ───────────────────────────────────────────────────────────────────
+const PLANS = {
+  basic: {
+    name: 'Basic',
+    featuresTitle: 'Basic Plan Includes',
+    featuresSub: 'Everything you need to get started',
+    features: [
+      'Scheduling & Rostering',
+      'Client Management',
+      'Timesheets & Payroll',
+      'Invoicing & Billing',
+      'Mobile App Access',
+      'Basic Reporting',
+      'Email & SMS notifications',
+    ],
+    staff:  { monthly: 9,  annual: 8  },   // per staff/month
+    client: { monthly: 9,  annual_year: 86.40, annual_mo: 7.20 },
+  },
+  professional: {
+    name: 'Professional',
+    featuresTitle: 'Professional Plan Includes',
+    featuresSub: 'Everything in Basic, plus...',
+    features: [
+      'Custom Forms & Templates',
+      'Progress Notes & Goal Tracking',
+      'Incident Reporting',
+      'API Access',
+      'Advanced Reporting',
+      'Priority Support',
+    ],
+    staff:  { monthly: 15, annual: 13 },
+    client: { monthly: 15, annual_year: 144.00, annual_mo: 12.00 },
+  },
+  premium: {
+    name: 'Premium',
+    featuresTitle: 'Premium Plan Includes',
+    featuresSub: 'Everything in Professional, plus...',
+    features: [
+      'Care Plans & Goals',
+      'Advanced Incident Management',
+      'eMAR Medication Tracking',
+      'Funds Management & Balance Alerts',
+      'NDIS Funding Period Management',
+      'One-Click AI shift summaries',
+      'Family Portal',
+    ],
+    staff:  { monthly: 25, annual: 20 },
+    client: { monthly: 20, annual_year: 192.00, annual_mo: 16.00 },
+  },
+  enterprise: {
+    name: 'Enterprise',
+    featuresTitle: 'Enterprise Plan Includes',
+    featuresSub: 'Everything in Premium, plus...',
+    features: [
+      'Custom contract & SLA',
+      'Dedicated account manager',
+      'Priority onboarding & training',
+      'Volume discounts',
+      'Custom integrations',
+      'SSO & advanced security',
+    ],
+    staff:  { monthly: null, annual: null },
+    client: { monthly: null, annual_year: null, annual_mo: null },
+  },
+};
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let billingMode = 'staff';   // 'staff' | 'client'
+let selectedPlan = 'premium';
+let count = 5;
+let isAnnual = true;
+
+const MIN_STAFF  = 5;
+const MIN_CLIENT = 1;
+
+function fmt(n) {
+  return '$' + n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// ── BILLING MODE ───────────────────────────────────────────────────────────
+function setBillingMode(mode) {
+  billingMode = mode;
+  document.getElementById('btn-staff').classList.toggle('active', mode === 'staff');
+  document.getElementById('btn-client').classList.toggle('active', mode === 'client');
+
+  const hint = document.getElementById('mode-hint');
+  const be   = document.getElementById('breakeven-info');
+  if (mode === 'staff') {
+    hint.textContent = 'Charged per staff licence. Minimum 5 staff.';
+    hint.classList.remove('highlight');
+    be.classList.remove('show');
+    count = Math.max(count, MIN_STAFF);
+  } else {
+    hint.textContent = 'Charged per active client. No staff licence fees.';
+    hint.classList.add('highlight');
+    be.classList.add('show');
+    count = Math.max(count, MIN_CLIENT);
+  }
+  updateAll();
+}
+
+// ── PLAN SELECTION ────────────────────────────────────────────────────────
+function selectPlan(plan) {
+  selectedPlan = plan;
+  ['basic','professional','premium','enterprise'].forEach(p => {
+    document.getElementById('opt-' + p).classList.toggle('selected', p === plan);
+    document.getElementById('r-' + p).checked = (p === plan);
+  });
+  updateAll();
+}
+
+// ── COUNT ADJUSTMENT ──────────────────────────────────────────────────────
+function adjustCount(delta) {
+  const min = billingMode === 'staff' ? MIN_STAFF : MIN_CLIENT;
+  count = Math.max(min, count + delta);
+  document.getElementById('btn-minus').disabled = (count <= min);
+  updateSummary();
+}
+
+// ── FULL UPDATE ───────────────────────────────────────────────────────────
+function updateAll() {
+  const plan = PLANS[selectedPlan];
+  const isEnterprise = selectedPlan === 'enterprise';
+  const isClient = billingMode === 'client';
+  const min = isClient ? MIN_CLIENT : MIN_STAFF;
+  count = Math.max(count, min);
+
+  // Features
+  document.getElementById('features-title').textContent = plan.featuresTitle;
+  document.getElementById('features-sub').textContent   = plan.featuresSub;
+  const fl = document.getElementById('feature-list');
+  fl.innerHTML = plan.features.map(f =>
+    '<div class="feature-item"><span class="check">✓</span><span>' + f + '</span></div>'
+  ).join('');
+
+  // Count section visibility
+  document.getElementById('count-section').style.display = isEnterprise ? 'none' : '';
+  document.getElementById('enterprise-info').classList.toggle('show', isEnterprise);
+  document.getElementById('order-summary').style.display = isEnterprise ? 'none' : '';
+  document.getElementById('annual-row') && null;
+
+  // Count label
+  document.getElementById('count-label').textContent = isClient ? 'Active clients' : 'Staff licenses';
+  document.getElementById('count-sublabel').textContent = isClient
+    ? 'Non-archived, non-prospect clients at billing date'
+    : 'You can adjust this anytime as your team grows';
+  document.getElementById('count-note').textContent = isClient
+    ? 'Minimum 1 active client. Count is automatically synced from your account.'
+    : 'Minimum 5 staff licences.';
+
+  // CTA button
+  const ctaBtn = document.getElementById('cta-btn');
+  if (isEnterprise) {
+    ctaBtn.textContent = 'Contact sales for Enterprise pricing';
+    ctaBtn.className = 'cta-btn enterprise-btn';
+  } else {
+    ctaBtn.textContent = 'Buy ' + plan.name + ' plan';
+    ctaBtn.className = 'cta-btn';
+  }
+
+  document.getElementById('btn-minus').disabled = (count <= min);
+  document.getElementById('count-display').textContent = count;
+
+  updateSummary();
+}
+
+// ── SUMMARY UPDATE ────────────────────────────────────────────────────────
+function updateSummary() {
+  isAnnual = document.getElementById('annual-toggle').checked;
+  const plan = PLANS[selectedPlan];
+  const isClient = billingMode === 'client';
+  const isEnterprise = selectedPlan === 'enterprise';
+
+  if (isEnterprise) return;
+
+  document.getElementById('count-display').textContent = count;
+
+  let rate, rateLabel, displayTotal, periodLabel, noteText, countValStr;
+
+  if (isClient) {
+    const p = plan.client;
+    if (isAnnual) {
+      rate = p.annual_mo;
+      const annualCharge = count * p.annual_year;
+      displayTotal = count * p.annual_mo;  // show effective monthly
+      rateLabel = fmt(p.annual_mo) + ' per client / month (annual)';
+      countValStr = count + ' × ' + fmt(p.annual_mo);
+      periodLabel = 'per month (effective)';
+      noteText = 'Billed annually at ' + fmt(annualCharge) + ' + GST. Cancel anytime.';
+    } else {
+      rate = p.monthly;
+      displayTotal = count * p.monthly;
+      rateLabel = fmt(p.monthly) + ' per client per month';
+      countValStr = count + ' × ' + fmt(p.monthly);
+      periodLabel = 'per month';
+      noteText = 'Billed monthly. Cancel anytime.';
+    }
+  } else {
+    const p = plan.staff;
+    if (isAnnual) {
+      rate = p.annual;
+      displayTotal = count * p.annual;
+      rateLabel = fmt(p.annual) + ' per staff per month (annual)';
+      countValStr = count + ' × ' + fmt(p.annual);
+      periodLabel = 'per month';
+      noteText = 'Billed annually. Cancel anytime.';
+    } else {
+      rate = p.monthly;
+      displayTotal = count * p.monthly;
+      rateLabel = fmt(p.monthly) + ' per staff per month';
+      countValStr = count + ' × ' + fmt(p.monthly);
+      periodLabel = 'per month';
+      noteText = 'Billed monthly. Cancel anytime.';
+    }
+  }
+
+  document.getElementById('count-rate').textContent = rateLabel;
+  document.getElementById('os-plan-label').textContent = plan.name + ' Plan';
+  document.getElementById('os-rate').textContent = rateLabel;
+  document.getElementById('os-cycle').textContent = isAnnual ? 'Annually' : 'Monthly';
+  document.getElementById('os-count-label').textContent = isClient ? 'Active clients' : 'Staff licences';
+  document.getElementById('os-count-val').textContent = countValStr;
+  document.getElementById('os-total').textContent = fmt(displayTotal);
+  document.getElementById('os-period').textContent = periodLabel;
+  document.getElementById('os-note').textContent = noteText;
+
+  // Save badge
+  document.getElementById('save-badge').style.display = isAnnual ? '' : 'none';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+updateAll();
+</script>
+</body>
+</html>
