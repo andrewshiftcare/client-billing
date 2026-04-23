@@ -30,22 +30,14 @@
       padding: 20px 18px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .sidebar-logo span {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
+    .sidebar-logo span { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
     .sidebar-logo span em { color: #4db8ff; font-style: normal; }
     .sidebar-nav { padding: 8px 0; flex: 1; }
     .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       padding: 9px 18px;
       color: rgba(255,255,255,0.72);
-      font-size: 13.5px;
-      cursor: pointer;
+      font-size: 13.5px; cursor: pointer;
       border-left: 3px solid transparent;
       transition: all 0.15s;
     }
@@ -55,440 +47,211 @@
     .nav-sub { padding-left: 46px; font-size: 12.5px; }
     .nav-sub.active-sub { color: #fff; border-left-color: #4db8ff; }
 
-    /* ── MAIN AREA ───────────────────────────────────────────────────────── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-    }
+    /* ── MAIN ────────────────────────────────────────────────────────────── */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
     .topbar {
       background: #fff;
       border-bottom: 1px solid #e2e8f0;
       padding: 0 24px;
       height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
     }
     .topbar h1 { font-size: 17px; font-weight: 600; color: #1e293b; }
     .topbar-right { display: flex; align-items: center; gap: 14px; color: #64748b; font-size: 13px; }
-    .impersonate-bar {
-      background: #fef3c7;
-      border-bottom: 1px solid #fbbf24;
-      padding: 6px 24px;
-      font-size: 12px;
-      color: #92400e;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .stop-btn {
-      background: #dc2626;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 11px;
-      cursor: pointer;
-    }
 
     .page-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 28px 32px;
-      position: relative;
+      flex: 1; overflow-y: auto;
+      padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 16px;
     }
 
-    /* Background subscription info (partially visible) */
-    .bg-subscription {
-      opacity: 0.35;
-      pointer-events: none;
-      user-select: none;
-    }
-    .sub-section { margin-bottom: 20px; }
-    .sub-section label { font-size: 12px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sub-section p { font-size: 14px; color: #1e293b; margin-top: 4px; }
-
-    /* ── MODAL OVERLAY ───────────────────────────────────────────────────── */
-    .modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(15,23,42,0.45);
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 24px 16px;
-      overflow-y: auto;
-      z-index: 10;
-    }
-
-    .modal {
+    /* ── SUBSCRIPTION PANEL ──────────────────────────────────────────────── */
+    .sub-panel {
       background: #fff;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 560px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-      position: relative;
-      overflow: hidden;
-    }
-    .modal-header {
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .modal-header h2 { font-size: 17px; font-weight: 700; color: #0f172a; }
-    .modal-header p { font-size: 13px; color: #64748b; margin-top: 3px; }
-    .close-btn {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: none;
-      background: #f1f5f9;
-      cursor: pointer;
-      font-size: 16px;
-      color: #64748b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
-    }
-    .close-btn:hover { background: #e2e8f0; }
-
-    /* ── BILLING MODE TOGGLE ─────────────────────────────────────────────── */
-    .billing-mode-section {
-      padding: 14px 24px;
-      background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .billing-mode-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 8px;
-    }
-    .billing-toggle {
-      display: inline-flex;
-      background: #e2e8f0;
-      border-radius: 8px;
-      padding: 3px;
-      gap: 2px;
-    }
-    .billing-toggle button {
-      padding: 7px 16px;
-      border-radius: 6px;
-      border: none;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s;
-      color: #64748b;
-      background: transparent;
-    }
-    .billing-toggle button.active {
-      background: #1b3a5c;
-      color: #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-    }
-    .billing-mode-hint {
-      font-size: 11.5px;
-      color: #94a3b8;
-      margin-top: 6px;
-    }
-    .billing-mode-hint.highlight { color: #0369a1; }
-
-    /* ── CURRENT PLAN ────────────────────────────────────────────────────── */
-    .current-plan-row {
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #fff;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .current-plan-row span { font-size: 13px; color: #64748b; }
-    .plan-chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .plan-chip strong { font-size: 14px; font-weight: 700; color: #0f172a; }
-    .trial-badge {
-      background: #fed7aa;
-      color: #c2410c;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .compare-link { font-size: 12px; color: #3b82f6; cursor: pointer; text-decoration: underline; }
-
-    /* ── PLAN SELECTOR ───────────────────────────────────────────────────── */
-    .section-pad { padding: 16px 24px; }
-    .section-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 10px; }
-
-    .plan-list { display: flex; flex-direction: column; gap: 6px; }
-    .plan-option {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      border: 2px solid #e2e8f0;
-      cursor: pointer;
-      transition: all 0.15s;
-      position: relative;
-    }
-    .plan-option:hover { border-color: #94a3b8; }
-    .plan-option.selected { border-color: #1b3a5c; background: #f0f6ff; }
-    .plan-option input[type=radio] { accent-color: #1b3a5c; width: 16px; height: 16px; cursor: pointer; }
-    .plan-name { font-size: 14px; font-weight: 600; color: #0f172a; }
-    .plan-desc { font-size: 12px; color: #64748b; }
-    .popular-badge {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #15803d;
-      color: white;
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 20px;
-      letter-spacing: 0.3px;
-    }
-
-    /* ── COUNT SECTION ───────────────────────────────────────────────────── */
-    .count-section {
-      margin: 0 24px 16px;
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 14px 16px;
+      border-radius: 14px;
       border: 1px solid #e2e8f0;
-    }
-    .count-section-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 10px; }
-    .count-row { display: flex; align-items: center; gap: 14px; }
-    .stepper {
+      overflow: hidden;
       display: flex;
-      align-items: center;
-      gap: 0;
+      flex-direction: column;
     }
+    .sub-panel-header {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .sub-panel-header h2 { font-size: 16px; font-weight: 700; color: #0f172a; }
+    .sub-panel-header p { font-size: 13px; color: #64748b; margin-top: 3px; }
+
+    .sub-panel-body {
+      padding: 18px 22px;
+      display: flex;
+      gap: 18px;
+      flex: 1;
+    }
+
+    /* ── LEFT COLUMN ─────────────────────────────────────────────────────── */
+    .left-col { flex: 1; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+    /* Billing mode toggle */
+    .billing-mode-box {
+      background: #f8fafc; border-radius: 10px;
+      border: 1px solid #e2e8f0; padding: 12px 14px;
+    }
+    .section-label {
+      font-size: 11px; color: #94a3b8; text-transform: uppercase;
+      letter-spacing: 0.6px; font-weight: 600; margin-bottom: 9px;
+    }
+    .toggle-pill {
+      display: flex; background: #e2e8f0; border-radius: 8px; padding: 3px; gap: 3px;
+    }
+    .toggle-pill button {
+      flex: 1; padding: 7px 10px; border-radius: 6px; border: none;
+      font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;
+      color: #64748b; background: transparent;
+    }
+    .toggle-pill button.active { background: #1b3a5c; color: #fff; }
+    .mode-hint { font-size: 12px; color: #94a3b8; margin-top: 7px; }
+
+    /* Plan cards 2×2 grid */
+    .plans-box {
+      background: #f8fafc; border-radius: 10px;
+      border: 1px solid #e2e8f0; padding: 12px 14px;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .plan-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr; gap: 8px; flex: 1;
+    }
+    .plan-card {
+      border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 14px; cursor: pointer;
+      background: #fff; position: relative;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .plan-card:hover { border-color: #94a3b8; }
+    .plan-card.selected { border: 2px solid #1b3a5c; background: #f0f6ff; }
+    .plan-card .plan-name { font-size: 14px; font-weight: 600; color: #0f172a; margin-bottom: 5px; }
+    .plan-card .plan-price { font-size: 22px; font-weight: 700; color: #1b3a5c; margin-bottom: 2px; }
+    .plan-card .plan-price small { font-size: 12px; font-weight: 400; color: #94a3b8; }
+    .plan-card .plan-unit { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+    .plan-card .plan-desc { font-size: 11.5px; color: #64748b; line-height: 1.45; }
+    .popular-badge {
+      position: absolute; top: -9px; left: 12px;
+      background: #15803d; color: #fff;
+      font-size: 10px; font-weight: 600; padding: 2px 10px; border-radius: 20px;
+    }
+
+    /* Count + Annual row */
+    .count-box {
+      background: #f8fafc; border-radius: 10px;
+      border: 1px solid #e2e8f0; padding: 12px 14px;
+    }
+    .count-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .stepper { display: flex; align-items: center; }
     .stepper button {
-      width: 34px;
-      height: 34px;
-      border: 1px solid #cbd5e1;
-      background: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      color: #374151;
+      width: 34px; height: 34px;
+      border: 1px solid #cbd5e1; background: #fff;
+      font-size: 18px; cursor: pointer; color: #374151;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
     }
-    .stepper button:hover { background: #f1f5f9; }
     .stepper button:first-child { border-radius: 6px 0 0 6px; border-right: none; }
     .stepper button:last-child { border-radius: 0 6px 6px 0; border-left: none; }
-    .stepper button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .stepper button:hover { background: #f1f5f9; }
+    .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
     .count-display {
-      font-size: 20px;
-      font-weight: 700;
-      color: #0f172a;
-      min-width: 48px;
-      text-align: center;
-      border-top: 1px solid #cbd5e1;
-      border-bottom: 1px solid #cbd5e1;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 52px; height: 34px;
+      border-top: 1px solid #cbd5e1; border-bottom: 1px solid #cbd5e1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: #0f172a;
     }
-    .count-rate {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1b3a5c;
-    }
-    .count-sublabel { font-size: 12px; color: #64748b; margin-top: 3px; }
-    .count-note { font-size: 11.5px; color: #94a3b8; margin-top: 8px; }
+    .count-info { flex: 1; }
+    .count-rate { font-size: 13px; font-weight: 600; color: #1b3a5c; }
+    .count-note { font-size: 11px; color: #94a3b8; margin-top: 3px; }
 
-    /* ── PLAN FEATURES ───────────────────────────────────────────────────── */
-    .features-section { padding: 0 24px 16px; }
-    .features-title { font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
-    .features-sub { font-size: 12px; color: #64748b; margin-bottom: 10px; }
-    .feature-list { display: flex; flex-direction: column; gap: 5px; }
+    /* Annual toggle */
+    .annual-toggle { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .switch { position: relative; width: 40px; height: 22px; display: inline-block; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .switch-track {
+      position: absolute; inset: 0; background: #94a3b8;
+      border-radius: 22px; cursor: pointer; transition: background 0.2s;
+    }
+    .switch input:checked + .switch-track { background: #3b82f6; }
+    .switch-thumb {
+      position: absolute; width: 16px; height: 16px;
+      left: 3px; top: 3px; background: #fff; border-radius: 50%;
+      transition: transform 0.2s; pointer-events: none;
+    }
+    .switch input:checked ~ .switch-thumb { transform: translateX(18px); }
+    .annual-label p { font-size: 12px; font-weight: 600; color: #374151; margin: 0; }
+    .annual-label small { font-size: 11px; color: #15803d; }
+
+    /* Enterprise callout */
+    .ent-callout {
+      display: none; background: #eff6ff;
+      border: 1px solid #bfdbfe; border-radius: 10px; padding: 13px 15px;
+    }
+    .ent-callout.show { display: block; }
+    .ent-callout strong { display: block; font-size: 13px; color: #1e40af; margin-bottom: 4px; }
+    .ent-callout p { font-size: 12px; color: #3b82f6; }
+
+    /* ── RIGHT COLUMN ────────────────────────────────────────────────────── */
+    .right-col { width: 248px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; }
+
+    .summary-box {
+      background: #f8fafc; border-radius: 10px;
+      border: 1px solid #e2e8f0; padding: 14px;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between;
+      font-size: 12px; margin-bottom: 8px; align-items: baseline;
+    }
+    .summary-row .lbl { color: #64748b; }
+    .summary-row .val { font-weight: 600; color: #1d4ed8; }
+    .summary-row .val-neutral { font-weight: 500; color: #0f172a; }
+
+    .total-block { border-top: 1px solid #e2e8f0; padding-top: 12px; margin-bottom: 14px; }
+    .total-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+    .total-amount { font-size: 30px; font-weight: 700; color: #0f172a; display: flex; align-items: baseline; gap: 5px; }
+    .total-amount small { font-size: 12px; font-weight: 400; color: #94a3b8; }
+    .total-note { font-size: 11px; color: #94a3b8; margin-top: 4px; }
+
+    .features-block { border-top: 1px solid #e2e8f0; padding-top: 12px; flex: 1; }
+    .features-title { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 8px; }
     .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 13px;
-      color: #374151;
+      display: flex; align-items: flex-start; gap: 6px;
+      font-size: 11.5px; color: #64748b; margin-bottom: 5px;
     }
-    .check { color: #16a34a; font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+    .feature-item .tick { color: #16a34a; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
 
-    /* ── ORDER SUMMARY ───────────────────────────────────────────────────── */
-    .order-summary {
-      margin: 0 24px 16px;
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 14px 16px;
-      border: 1px solid #e2e8f0;
-    }
-    .order-title { font-size: 13px; font-weight: 700; color: #374151; margin-bottom: 10px; }
-    .order-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: #374151;
-      margin-bottom: 6px;
-      align-items: center;
-    }
-    .order-row .label { color: #64748b; }
-    .order-row .value { font-weight: 500; }
-    .order-row .value.blue { color: #1d4ed8; }
-    .total-row {
-      border-top: 1px solid #e2e8f0;
-      margin-top: 10px;
-      padding-top: 10px;
-    }
-    .total-amount {
-      font-size: 26px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-    .total-gst { font-size: 13px; color: #94a3b8; margin-left: 4px; }
-    .total-period { font-size: 12px; color: #64748b; margin-top: 2px; }
-    .total-note { font-size: 11.5px; color: #94a3b8; margin-top: 2px; }
-
-    /* ── ANNUAL TOGGLE ───────────────────────────────────────────────────── */
-    .annual-row {
-      margin: 0 24px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .toggle-switch {
-      position: relative;
-      width: 44px;
-      height: 24px;
-      flex-shrink: 0;
-    }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .toggle-slider {
-      position: absolute;
-      inset: 0;
-      background: #cbd5e1;
-      border-radius: 24px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .toggle-slider::before {
-      content: '';
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      left: 3px;
-      top: 3px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    .toggle-switch input:checked + .toggle-slider { background: #3b82f6; }
-    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
-    .annual-label { font-size: 13px; color: #374151; }
-    .save-badge {
-      background: #dcfce7;
-      color: #15803d;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-
-    /* ── CTA BUTTON ──────────────────────────────────────────────────────── */
-    .modal-footer { padding: 4px 24px 20px; }
     .cta-btn {
-      width: 100%;
-      padding: 14px;
-      background: #1b3a5c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.15s;
-      letter-spacing: 0.2px;
+      width: 100%; padding: 13px;
+      background: #1b3a5c; color: #fff; border: none;
+      border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.2px; transition: background 0.15s;
     }
     .cta-btn:hover { background: #264f7a; }
-    .cta-btn.enterprise-btn { background: #64748b; }
-    .cta-btn.enterprise-btn:hover { background: #475569; }
-    .footer-note {
-      text-align: center;
-      font-size: 11.5px;
-      color: #94a3b8;
-      margin-top: 8px;
-    }
-    .footer-legal {
-      font-size: 11px;
-      color: #94a3b8;
-      text-align: center;
-      padding: 10px 24px 16px;
-      line-height: 1.5;
-      border-top: 1px solid #f1f5f9;
-    }
-    .footer-legal a { color: #3b82f6; text-decoration: none; }
+    .cta-btn.ent { background: #64748b; }
+    .cta-btn.ent:hover { background: #475569; }
+    .no-lock { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 2px; }
 
-    /* ── ENTERPRISE CALLOUT ──────────────────────────────────────────────── */
-    .enterprise-info {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin: 0 24px 16px;
-      font-size: 12.5px;
-      color: #1e40af;
-      display: none;
+    /* Footer legal */
+    .legal {
+      font-size: 11px; color: #94a3b8; text-align: center;
+      padding: 12px 22px 16px; border-top: 1px solid #f1f5f9; line-height: 1.5;
     }
-    .enterprise-info.show { display: block; }
-    .enterprise-info strong { display: block; margin-bottom: 4px; font-size: 13px; }
-
-    /* ── BREAKEVEN INFO ───────────────────────────────────────────────────── */
-    .breakeven-info {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin: -4px 24px 12px;
-      font-size: 12px;
-      color: #166534;
-      display: none;
-    }
-    .breakeven-info.show { display: block; }
-
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-    }
+    .legal a { color: #3b82f6; text-decoration: none; }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<!-- ══ SIDEBAR ══ -->
 <aside class="sidebar">
-  <div class="sidebar-logo">
-    <span>Shift<em>Care</em></span>
-  </div>
+  <div class="sidebar-logo"><span>Shift<em>Care</em></span></div>
   <nav class="sidebar-nav">
     <div class="nav-item"><span class="nav-icon">📊</span> Dashboard</div>
     <div class="nav-item"><span class="nav-icon">📅</span> Scheduler</div>
@@ -513,431 +276,320 @@
   </nav>
 </aside>
 
-<!-- ════════════════════ MAIN ════════════════════ -->
+<!-- ══ MAIN ══ -->
 <div class="main">
-  <!-- Top bar -->
   <div class="topbar">
     <h1>Subscription</h1>
     <div class="topbar-right">
-      <span>🔍</span>
-      <span>❓</span>
-      <span>🔔</span>
+      <span>🔍</span><span>❓</span><span>🔔</span>
       <span style="font-weight:600; color:#1e293b;">Kirti</span>
     </div>
   </div>
 
-  <!-- Page content (blurred background) -->
   <div class="page-content">
-    <div class="bg-subscription">
-      <div class="sub-section">
-        <label>Current Plan</label>
-        <p>ShiftCare Premium Trials Subscription</p>
+    <div class="sub-panel">
+
+      <!-- Panel header -->
+      <div class="sub-panel-header">
+        <h2>Your Subscription Summary</h2>
+        <p>Review your plan and billing. You can change this anytime.</p>
       </div>
-      <div class="sub-section">
-        <label>Billing Period</label>
-        <p>Annually</p>
-      </div>
-    </div>
 
-    <!-- ════════════ MODAL ════════════ -->
-    <div class="modal-overlay">
-      <div class="modal">
+      <!-- Panel body — two columns -->
+      <div class="sub-panel-body">
 
-        <!-- Header -->
-        <div class="modal-header">
-          <h2>Your Subscription Summary</h2>
-          <p>Review your plan and billing. You can change this anytime.</p>
-          <button class="close-btn" title="Close">✕</button>
-        </div>
+        <!-- ── LEFT COLUMN ── -->
+        <div class="left-col">
 
-        <!-- Billing mode toggle -->
-        <div class="billing-mode-section">
-          <div class="billing-mode-label">Billing model</div>
-          <div class="billing-toggle">
-            <button id="btn-staff" class="active" onclick="setBillingMode('staff')">Staff billing</button>
-            <button id="btn-client" onclick="setBillingMode('client')">Per-client billing</button>
-          </div>
-          <div class="billing-mode-hint" id="mode-hint">
-            Charged per staff licence. Minimum 5 staff.
-          </div>
-        </div>
-
-        <!-- Current plan chip -->
-        <div class="current-plan-row">
-          <span>Current plan</span>
-          <div class="plan-chip">
-            <strong id="current-plan-label">Premium – Trial</strong>
-            <span class="trial-badge">⏱ 7 days remaining</span>
-          </div>
-          <span class="compare-link">ⓘ Compare plans</span>
-        </div>
-
-        <!-- Plan selector -->
-        <div class="section-pad" style="padding-bottom:10px;">
-          <div class="section-label">Select Plan</div>
-          <div class="plan-list">
-            <label class="plan-option" id="opt-basic" onclick="selectPlan('basic')">
-              <input type="radio" name="plan" value="basic" id="r-basic">
-              <div>
-                <div class="plan-name">Basic</div>
-                <div class="plan-desc" id="desc-basic">Core scheduling, clients &amp; timesheets</div>
-              </div>
-            </label>
-            <label class="plan-option" id="opt-professional" onclick="selectPlan('professional')">
-              <input type="radio" name="plan" value="professional" id="r-professional">
-              <div>
-                <div class="plan-name">Professional</div>
-                <div class="plan-desc" id="desc-professional">Forms, progress notes &amp; API access</div>
-              </div>
-            </label>
-            <label class="plan-option selected" id="opt-premium" onclick="selectPlan('premium')">
-              <input type="radio" name="plan" value="premium" id="r-premium" checked>
-              <div>
-                <div class="plan-name">Premium</div>
-                <div class="plan-desc" id="desc-premium">Advanced scheduling and collaboration tools</div>
-              </div>
-              <span class="popular-badge">MOST POPULAR</span>
-            </label>
-            <label class="plan-option" id="opt-enterprise" onclick="selectPlan('enterprise')">
-              <input type="radio" name="plan" value="enterprise" id="r-enterprise">
-              <div>
-                <div class="plan-name">Enterprise</div>
-                <div class="plan-desc">Custom pricing &amp; dedicated support</div>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- Breakeven hint (per-client only) -->
-        <div class="breakeven-info" id="breakeven-info">
-          💡 <strong>Is per-client billing right for you?</strong>
-          Per-client billing saves money when you have more than <strong>0.8 staff per client</strong>
-          (e.g. SIL, residential, or high-needs NDIS care). For community care with many clients per
-          worker, staff billing is typically cheaper.
-        </div>
-
-        <!-- Count section -->
-        <div class="count-section" id="count-section">
-          <div class="count-section-label" id="count-label">Staff licenses</div>
-          <div class="count-row">
-            <div class="stepper">
-              <button id="btn-minus" onclick="adjustCount(-1)">−</button>
-              <div class="count-display" id="count-display">5</div>
-              <button id="btn-plus" onclick="adjustCount(1)">+</button>
+          <!-- Billing mode -->
+          <div class="billing-mode-box">
+            <div class="section-label">Billing model</div>
+            <div class="toggle-pill">
+              <button id="btn-staff" class="active" onclick="setMode('staff')">Staff billing</button>
+              <button id="btn-client" onclick="setMode('client')">Per-client billing</button>
             </div>
-            <div>
-              <div class="count-rate" id="count-rate">$25.00 per staff per month</div>
-              <div class="count-sublabel" id="count-sublabel">You can adjust this anytime as your team grows</div>
+            <p class="mode-hint" id="mode-hint">Charged per staff licence · minimum 5</p>
+          </div>
+
+          <!-- Plan cards 2×2 -->
+          <div class="plans-box">
+            <div class="section-label">Select plan</div>
+            <div class="plan-grid">
+
+              <!-- Premium — top left -->
+              <div class="plan-card selected" id="card-premium" onclick="selectPlan('premium')">
+                <div class="popular-badge">Most popular</div>
+                <div>
+                  <div class="plan-name">Premium</div>
+                  <div class="plan-price" id="rate-premium">$25<small>/mo</small></div>
+                  <div class="plan-unit" id="unit-premium">per staff</div>
+                </div>
+                <div class="plan-desc">Advanced scheduling, AI tools &amp; family portal</div>
+              </div>
+
+              <!-- Professional — top right -->
+              <div class="plan-card" id="card-professional" onclick="selectPlan('professional')">
+                <div>
+                  <div class="plan-name">Professional</div>
+                  <div class="plan-price" id="rate-professional">$15<small>/mo</small></div>
+                  <div class="plan-unit" id="unit-professional">per staff</div>
+                </div>
+                <div class="plan-desc">Forms, progress notes &amp; API access</div>
+              </div>
+
+              <!-- Basic — bottom left -->
+              <div class="plan-card" id="card-basic" onclick="selectPlan('basic')">
+                <div>
+                  <div class="plan-name">Basic</div>
+                  <div class="plan-price" id="rate-basic">$9<small>/mo</small></div>
+                  <div class="plan-unit" id="unit-basic">per staff</div>
+                </div>
+                <div class="plan-desc">Scheduling, clients, timesheets &amp; invoicing</div>
+              </div>
+
+              <!-- Enterprise — bottom right -->
+              <div class="plan-card" id="card-enterprise" onclick="selectPlan('enterprise')">
+                <div>
+                  <div class="plan-name">Enterprise</div>
+                  <div class="plan-price" style="font-size:18px;">Custom</div>
+                  <div class="plan-unit">pricing on request</div>
+                </div>
+                <div class="plan-desc">Custom contract, SLA &amp; dedicated support</div>
+              </div>
+
             </div>
           </div>
-          <div class="count-note" id="count-note">Minimum 5 staff licences.</div>
-        </div>
 
-        <!-- Enterprise callout -->
-        <div class="enterprise-info" id="enterprise-info">
-          <strong>Enterprise pricing is on request</strong>
-          Contact our sales team for a custom quote based on your organisation's size and needs.
-          We offer volume discounts, dedicated onboarding, and a tailored SLA.
-          <br><br>
-          <a href="mailto:sales@shiftcare.com" style="color:#1e40af; font-weight:600;">Contact sales →</a>
-        </div>
-
-        <!-- Plan features -->
-        <div class="features-section" id="features-section">
-          <div class="features-title" id="features-title">Premium Plan Includes</div>
-          <div class="features-sub" id="features-sub">Everything in Professional, plus...</div>
-          <div class="feature-list" id="feature-list"></div>
-        </div>
-
-        <!-- Order summary -->
-        <div class="order-summary" id="order-summary">
-          <div class="order-title">Order Summary</div>
-          <div class="order-row">
-            <span class="label" id="os-plan-label">Premium Plan</span>
-            <span class="value blue" id="os-rate">$25.00 per staff</span>
-          </div>
-          <div class="order-row">
-            <span class="label">Billing cycle</span>
-            <span class="value blue" id="os-cycle">Annually</span>
-          </div>
-          <div class="order-row">
-            <span class="label" id="os-count-label">Staff licences</span>
-            <span class="value" id="os-count-val">5 × $20.00</span>
-          </div>
-          <div class="order-row total-row" style="align-items:flex-start; flex-direction:column; gap:2px;">
-            <span style="font-size:13px; color:#64748b;">Estimated monthly total</span>
-            <div style="display:flex; align-items:baseline; gap:4px;">
-              <span class="total-amount" id="os-total">$100.00</span>
-              <span class="total-gst">+ GST</span>
+          <!-- Count + Annual toggle -->
+          <div class="count-box" id="count-box">
+            <div class="section-label" id="count-section-label">Staff licences</div>
+            <div class="count-row">
+              <div class="stepper">
+                <button id="btn-minus" onclick="adj(-1)">−</button>
+                <div class="count-display" id="count-val">5</div>
+                <button onclick="adj(1)">+</button>
+              </div>
+              <div class="count-info">
+                <div class="count-rate" id="count-rate">$25.00 per staff / month</div>
+                <div class="count-note" id="count-note">Minimum 5 staff licences</div>
+              </div>
+              <div class="annual-toggle">
+                <label class="switch">
+                  <input type="checkbox" id="annual-chk" checked onchange="update()">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+                <div class="annual-label">
+                  <p>Annual billing</p>
+                  <small>Save 20%</small>
+                </div>
+              </div>
             </div>
-            <div class="total-period" id="os-period">per month</div>
-            <div class="total-note" id="os-note">Billed annually. Cancel anytime.</div>
           </div>
-        </div>
 
-        <!-- Annual toggle -->
-        <div class="annual-row">
-          <label class="toggle-switch">
-            <input type="checkbox" id="annual-toggle" checked onchange="updateSummary()">
-            <span class="toggle-slider"></span>
-          </label>
-          <span class="annual-label">Switch to Annual Billing to save up to 20%</span>
-          <span class="save-badge" id="save-badge">Save 20%</span>
-        </div>
+          <!-- Enterprise callout -->
+          <div class="ent-callout" id="ent-callout">
+            <strong>Enterprise pricing is on request</strong>
+            <p>Contact our sales team for a custom quote, volume discounts, and dedicated onboarding.</p>
+          </div>
 
-        <!-- CTA -->
-        <div class="modal-footer">
+        </div><!-- /.left-col -->
+
+        <!-- ── RIGHT COLUMN ── -->
+        <div class="right-col">
+
+          <!-- Order summary -->
+          <div class="summary-box" id="summary-box">
+            <div class="section-label">Order summary</div>
+            <div class="summary-row">
+              <span class="lbl" id="os-plan">Premium plan</span>
+              <span class="val" id="os-rate">$25 / staff</span>
+            </div>
+            <div class="summary-row">
+              <span class="lbl">Billing cycle</span>
+              <span class="val" id="os-cycle">Annually</span>
+            </div>
+            <div class="summary-row">
+              <span class="lbl" id="os-count-lbl">Staff licences</span>
+              <span class="val-neutral" id="os-count-val">5 × $20.00</span>
+            </div>
+            <div class="total-block">
+              <div class="total-label">Estimated monthly total</div>
+              <div class="total-amount">
+                <span id="os-total">$100</span>
+                <small>+ GST</small>
+              </div>
+              <div class="total-note" id="os-note">Billed annually. Cancel anytime.</div>
+            </div>
+            <div class="features-block">
+              <div class="features-title" id="feat-title">Premium includes</div>
+              <div id="feat-list"></div>
+            </div>
+          </div>
+
+          <!-- Enterprise summary -->
+          <div class="summary-box" id="ent-summary" style="display:none;">
+            <div class="section-label">Enterprise includes</div>
+            <div id="ent-feat-list"></div>
+          </div>
+
           <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
-          <div class="footer-note">No lock in. No setup fees.</div>
-        </div>
+          <p class="no-lock">No lock in. No setup fees.</p>
 
-        <!-- Legal footer -->
-        <div class="footer-legal">
-          By making this purchase, you agree to our
-          <a href="#">Terms of Service</a> and authorise ShiftCare to charge your
-          nominated payment method. Your subscription will automatically renew.
-          You may cancel anytime.
-        </div>
+        </div><!-- /.right-col -->
 
-      </div><!-- /.modal -->
-    </div><!-- /.modal-overlay -->
+      </div><!-- /.sub-panel-body -->
+
+      <div class="legal">
+        By making this purchase, you agree to our <a href="#">Terms of Service</a> and authorise
+        ShiftCare to charge your nominated payment method. Your subscription will automatically
+        renew. You may cancel anytime.
+      </div>
+
+    </div><!-- /.sub-panel -->
   </div><!-- /.page-content -->
 </div><!-- /.main -->
 
 <script>
-// ── DATA ───────────────────────────────────────────────────────────────────
 const PLANS = {
   basic: {
     name: 'Basic',
-    featuresTitle: 'Basic Plan Includes',
-    featuresSub: 'Everything you need to get started',
-    features: [
-      'Scheduling & Rostering',
-      'Client Management',
-      'Timesheets & Payroll',
-      'Invoicing & Billing',
-      'Mobile App Access',
-      'Basic Reporting',
-      'Email & SMS notifications',
-    ],
-    staff:  { monthly: 9,  annual: 8  },   // per staff/month
-    client: { monthly: 9,  annual_year: 86.40, annual_mo: 7.20 },
+    staff:  { mo: 9,  ann: 8  },
+    client: { mo: 9,  ann_yr: 84,  ann_mo: 7  },
+    feats: ['Scheduling & rostering','Client management','Timesheets & payroll','Invoicing & billing','Mobile app','Basic reporting']
   },
   professional: {
     name: 'Professional',
-    featuresTitle: 'Professional Plan Includes',
-    featuresSub: 'Everything in Basic, plus...',
-    features: [
-      'Custom Forms & Templates',
-      'Progress Notes & Goal Tracking',
-      'Incident Reporting',
-      'API Access',
-      'Advanced Reporting',
-      'Priority Support',
-    ],
-    staff:  { monthly: 15, annual: 13 },
-    client: { monthly: 15, annual_year: 144.00, annual_mo: 12.00 },
+    staff:  { mo: 15, ann: 13 },
+    client: { mo: 15, ann_yr: 144, ann_mo: 12 },
+    feats: ['Everything in Basic','Custom forms & templates','Progress notes','Incident reporting','API access','Advanced reporting','Priority support']
   },
   premium: {
     name: 'Premium',
-    featuresTitle: 'Premium Plan Includes',
-    featuresSub: 'Everything in Professional, plus...',
-    features: [
-      'Care Plans & Goals',
-      'Advanced Incident Management',
-      'eMAR Medication Tracking',
-      'Funds Management & Balance Alerts',
-      'NDIS Funding Period Management',
-      'One-Click AI shift summaries',
-      'Family Portal',
-    ],
-    staff:  { monthly: 25, annual: 20 },
-    client: { monthly: 20, annual_year: 192.00, annual_mo: 16.00 },
+    staff:  { mo: 25, ann: 20 },
+    client: { mo: 20, ann_yr: 192, ann_mo: 16 },
+    feats: ['Everything in Professional','Care plans & goals','Advanced incident management','eMAR medication tracking','Funds management & alerts','NDIS funding period management','AI shift summaries','Family portal']
   },
   enterprise: {
     name: 'Enterprise',
-    featuresTitle: 'Enterprise Plan Includes',
-    featuresSub: 'Everything in Premium, plus...',
-    features: [
-      'Custom contract & SLA',
-      'Dedicated account manager',
-      'Priority onboarding & training',
-      'Volume discounts',
-      'Custom integrations',
-      'SSO & advanced security',
-    ],
-    staff:  { monthly: null, annual: null },
-    client: { monthly: null, annual_year: null, annual_mo: null },
-  },
+    staff:  { mo: null, ann: null },
+    client: { mo: null, ann_yr: null, ann_mo: null },
+    feats: ['Everything in Premium','Custom contract & SLA','Dedicated account manager','Volume discounts','Custom integrations','SSO & advanced security']
+  }
 };
 
-// ── STATE ──────────────────────────────────────────────────────────────────
-let billingMode = 'staff';   // 'staff' | 'client'
-let selectedPlan = 'premium';
-let count = 5;
-let isAnnual = true;
-
-const MIN_STAFF  = 5;
-const MIN_CLIENT = 1;
+const MIN = 5;
+let mode = 'staff', plan = 'premium', count = 5;
 
 function fmt(n) {
   return '$' + n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// ── BILLING MODE ───────────────────────────────────────────────────────────
-function setBillingMode(mode) {
-  billingMode = mode;
-  document.getElementById('btn-staff').classList.toggle('active', mode === 'staff');
-  document.getElementById('btn-client').classList.toggle('active', mode === 'client');
-
-  const hint = document.getElementById('mode-hint');
-  const be   = document.getElementById('breakeven-info');
-  if (mode === 'staff') {
-    hint.textContent = 'Charged per staff licence. Minimum 5 staff.';
-    hint.classList.remove('highlight');
-    be.classList.remove('show');
-    count = Math.max(count, MIN_STAFF);
-  } else {
-    hint.textContent = 'Charged per active client. No staff licence fees.';
-    hint.classList.add('highlight');
-    be.classList.add('show');
-    count = Math.max(count, MIN_CLIENT);
-  }
-  updateAll();
+function setMode(m) {
+  mode = m;
+  document.getElementById('btn-staff').className = m === 'staff' ? 'active' : '';
+  document.getElementById('btn-client').className = m === 'client' ? 'active' : '';
+  document.getElementById('mode-hint').textContent = m === 'staff'
+    ? 'Charged per staff licence · minimum 5'
+    : 'Charged per active client · minimum 5';
+  count = Math.max(count, MIN);
+  update();
 }
 
-// ── PLAN SELECTION ────────────────────────────────────────────────────────
-function selectPlan(plan) {
-  selectedPlan = plan;
-  ['basic','professional','premium','enterprise'].forEach(p => {
-    document.getElementById('opt-' + p).classList.toggle('selected', p === plan);
-    document.getElementById('r-' + p).checked = (p === plan);
+function selectPlan(p) {
+  plan = p;
+  ['basic','professional','premium','enterprise'].forEach(id => {
+    document.getElementById('card-' + id).className = 'plan-card' + (id === p ? ' selected' : '');
   });
-  updateAll();
+  update();
 }
 
-// ── COUNT ADJUSTMENT ──────────────────────────────────────────────────────
-function adjustCount(delta) {
-  const min = billingMode === 'staff' ? MIN_STAFF : MIN_CLIENT;
-  count = Math.max(min, count + delta);
-  document.getElementById('btn-minus').disabled = (count <= min);
-  updateSummary();
+function adj(d) {
+  count = Math.max(MIN, count + d);
+  document.getElementById('btn-minus').disabled = count <= MIN;
+  update();
 }
 
-// ── FULL UPDATE ───────────────────────────────────────────────────────────
-function updateAll() {
-  const plan = PLANS[selectedPlan];
-  const isEnterprise = selectedPlan === 'enterprise';
-  const isClient = billingMode === 'client';
-  const min = isClient ? MIN_CLIENT : MIN_STAFF;
-  count = Math.max(count, min);
-
-  // Features
-  document.getElementById('features-title').textContent = plan.featuresTitle;
-  document.getElementById('features-sub').textContent   = plan.featuresSub;
-  const fl = document.getElementById('feature-list');
-  fl.innerHTML = plan.features.map(f =>
-    '<div class="feature-item"><span class="check">✓</span><span>' + f + '</span></div>'
+function featureHTML(list) {
+  return list.map(f =>
+    '<div class="feature-item"><span class="tick">✓</span>' + f + '</div>'
   ).join('');
+}
 
-  // Count section visibility
-  document.getElementById('count-section').style.display = isEnterprise ? 'none' : '';
-  document.getElementById('enterprise-info').classList.toggle('show', isEnterprise);
-  document.getElementById('order-summary').style.display = isEnterprise ? 'none' : '';
-  document.getElementById('annual-row') && null;
+function update() {
+  const annual = document.getElementById('annual-chk').checked;
+  const isEnt = plan === 'enterprise';
+  const d = PLANS[plan];
 
-  // Count label
-  document.getElementById('count-label').textContent = isClient ? 'Active clients' : 'Staff licenses';
-  document.getElementById('count-sublabel').textContent = isClient
-    ? 'Non-archived, non-prospect clients at billing date'
-    : 'You can adjust this anytime as your team grows';
-  document.getElementById('count-note').textContent = isClient
-    ? 'Minimum 1 active client. Count is automatically synced from your account.'
-    : 'Minimum 5 staff licences.';
+  // Update rate labels on all cards
+  ['basic','professional','premium'].forEach(p => {
+    const pd = PLANS[p];
+    const r = mode === 'staff' ? (annual ? pd.staff.ann : pd.staff.mo)
+                               : (annual ? pd.client.ann_mo : pd.client.mo);
+    document.getElementById('rate-' + p).innerHTML = '$' + r + '<small>/mo</small>';
+    document.getElementById('unit-' + p).textContent = mode === 'staff' ? 'per staff' : 'per client';
+  });
 
-  // CTA button
+  // Toggle panels
+  document.getElementById('count-box').style.display   = isEnt ? 'none' : '';
+  document.getElementById('ent-callout').className      = 'ent-callout' + (isEnt ? ' show' : '');
+  document.getElementById('summary-box').style.display  = isEnt ? 'none' : '';
+  document.getElementById('ent-summary').style.display  = isEnt ? '' : 'none';
   const ctaBtn = document.getElementById('cta-btn');
-  if (isEnterprise) {
-    ctaBtn.textContent = 'Contact sales for Enterprise pricing';
-    ctaBtn.className = 'cta-btn enterprise-btn';
-  } else {
-    ctaBtn.textContent = 'Buy ' + plan.name + ' plan';
-    ctaBtn.className = 'cta-btn';
+  ctaBtn.textContent = isEnt ? 'Contact sales' : 'Buy ' + d.name + ' plan';
+  ctaBtn.className = isEnt ? 'cta-btn ent' : 'cta-btn';
+
+  if (isEnt) {
+    document.getElementById('ent-feat-list').innerHTML = featureHTML(d.feats);
+    return;
   }
 
-  document.getElementById('btn-minus').disabled = (count <= min);
-  document.getElementById('count-display').textContent = count;
+  count = Math.max(count, MIN);
+  document.getElementById('count-val').textContent = count;
+  document.getElementById('btn-minus').disabled = count <= MIN;
 
-  updateSummary();
-}
+  const unitLabel = mode === 'staff' ? 'Staff licences' : 'Active clients';
+  const unitWord  = mode === 'staff' ? 'staff' : 'client';
 
-// ── SUMMARY UPDATE ────────────────────────────────────────────────────────
-function updateSummary() {
-  isAnnual = document.getElementById('annual-toggle').checked;
-  const plan = PLANS[selectedPlan];
-  const isClient = billingMode === 'client';
-  const isEnterprise = selectedPlan === 'enterprise';
-
-  if (isEnterprise) return;
-
-  document.getElementById('count-display').textContent = count;
-
-  let rate, rateLabel, displayTotal, periodLabel, noteText, countValStr;
-
-  if (isClient) {
-    const p = plan.client;
-    if (isAnnual) {
-      rate = p.annual_mo;
-      const annualCharge = count * p.annual_year;
-      displayTotal = count * p.annual_mo;  // show effective monthly
-      rateLabel = fmt(p.annual_mo) + ' per client / month (annual)';
-      countValStr = count + ' × ' + fmt(p.annual_mo);
-      periodLabel = 'per month (effective)';
-      noteText = 'Billed annually at ' + fmt(annualCharge) + ' + GST. Cancel anytime.';
-    } else {
-      rate = p.monthly;
-      displayTotal = count * p.monthly;
-      rateLabel = fmt(p.monthly) + ' per client per month';
-      countValStr = count + ' × ' + fmt(p.monthly);
-      periodLabel = 'per month';
-      noteText = 'Billed monthly. Cancel anytime.';
-    }
+  let rate, total, rateStr, countValStr, note;
+  if (mode === 'staff') {
+    rate = annual ? d.staff.ann : d.staff.mo;
+    total = Math.round(count * rate);
+    rateStr = fmt(rate) + ' / staff';
+    countValStr = count + ' × ' + fmt(rate);
+    note = annual ? 'Billed annually. Cancel anytime.' : 'Billed monthly. Cancel anytime.';
   } else {
-    const p = plan.staff;
-    if (isAnnual) {
-      rate = p.annual;
-      displayTotal = count * p.annual;
-      rateLabel = fmt(p.annual) + ' per staff per month (annual)';
-      countValStr = count + ' × ' + fmt(p.annual);
-      periodLabel = 'per month';
-      noteText = 'Billed annually. Cancel anytime.';
+    if (annual) {
+      rate = d.client.ann_mo;
+      total = Math.round(count * rate);
+      rateStr = fmt(rate) + ' / client';
+      countValStr = count + ' × ' + fmt(rate);
+      note = 'Billed annually at ' + fmt(count * d.client.ann_yr) + ' + GST.';
     } else {
-      rate = p.monthly;
-      displayTotal = count * p.monthly;
-      rateLabel = fmt(p.monthly) + ' per staff per month';
-      countValStr = count + ' × ' + fmt(p.monthly);
-      periodLabel = 'per month';
-      noteText = 'Billed monthly. Cancel anytime.';
+      rate = d.client.mo;
+      total = Math.round(count * rate);
+      rateStr = fmt(rate) + ' / client';
+      countValStr = count + ' × ' + fmt(rate);
+      note = 'Billed monthly. Cancel anytime.';
     }
   }
 
-  document.getElementById('count-rate').textContent = rateLabel;
-  document.getElementById('os-plan-label').textContent = plan.name + ' Plan';
-  document.getElementById('os-rate').textContent = rateLabel;
-  document.getElementById('os-cycle').textContent = isAnnual ? 'Annually' : 'Monthly';
-  document.getElementById('os-count-label').textContent = isClient ? 'Active clients' : 'Staff licences';
+  document.getElementById('count-section-label').textContent = unitLabel;
+  document.getElementById('count-rate').textContent = fmt(rate) + ' per ' + unitWord + ' / month';
+  document.getElementById('count-note').textContent = 'Minimum ' + MIN + ' ' + (mode === 'staff' ? 'staff licences' : 'clients');
+  document.getElementById('os-plan').textContent = d.name + ' plan';
+  document.getElementById('os-rate').textContent = rateStr;
+  document.getElementById('os-cycle').textContent = annual ? 'Annually' : 'Monthly';
+  document.getElementById('os-count-lbl').textContent = unitLabel;
   document.getElementById('os-count-val').textContent = countValStr;
-  document.getElementById('os-total').textContent = fmt(displayTotal);
-  document.getElementById('os-period').textContent = periodLabel;
-  document.getElementById('os-note').textContent = noteText;
-
-  // Save badge
-  document.getElementById('save-badge').style.display = isAnnual ? '' : 'none';
+  document.getElementById('os-total').textContent = '$' + total.toLocaleString('en-AU');
+  document.getElementById('os-note').textContent = note;
+  document.getElementById('feat-title').textContent = d.name + ' includes';
+  document.getElementById('feat-list').innerHTML = featureHTML(d.feats);
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────
-updateAll();
+update();
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
