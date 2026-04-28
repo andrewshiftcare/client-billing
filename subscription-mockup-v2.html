@@ -247,11 +247,10 @@
     }
 
     .addon-card {
-      display: flex; align-items: flex-start;
-      border: 1.5px solid #e8ecf0; border-radius: 10px;
-      padding: 11px 12px; cursor: pointer; transition: all 0.14s;
-      background: #fff; gap: 10px; flex-shrink: 0;
-      margin-bottom: 2px;
+      display: flex; align-items: center;
+      border: 1.5px solid #e8ecf0; border-radius: 8px;
+      padding: 7px 10px; cursor: pointer; transition: all 0.14s;
+      background: #fff; gap: 8px; flex-shrink: 0;
       user-select: none;
     }
     .addon-card:hover { border-color: #93c5fd; background: #f5f9ff; }
@@ -261,10 +260,10 @@
     }
 
     .addon-check-box {
-      width: 16px; height: 16px; border-radius: 4px;
+      width: 15px; height: 15px; border-radius: 4px;
       border: 2px solid #cbd5e1; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.12s; margin-top: 1px;
+      transition: all 0.12s;
     }
     .addon-card.enabled .addon-check-box {
       background: #1b3a5c; border-color: #1b3a5c;
@@ -274,29 +273,27 @@
     }
     .addon-card.enabled .addon-check-mark { display: block; }
 
-    .addon-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
     .addon-body { flex: 1; min-width: 0; }
-    .addon-name { font-size: 12px; font-weight: 650; color: #0f172a; line-height: 1.3; }
-    .addon-desc { font-size: 10.5px; color: #64748b; margin-top: 2px; line-height: 1.35; }
+    .addon-name { font-size: 11.5px; font-weight: 650; color: #0f172a; line-height: 1.3; }
+    .addon-desc { font-size: 10px; color: #94a3b8; margin-top: 1px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .addon-price-col { text-align: right; flex-shrink: 0; }
-    .addon-price { font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1; }
-    .addon-price span { font-size: 9.5px; font-weight: 400; color: #94a3b8; display: block; margin-top: 2px; }
+    .addon-price { font-size: 13px; font-weight: 800; color: #0f172a; line-height: 1; }
+    .addon-price span { font-size: 9px; font-weight: 400; color: #94a3b8; display: block; margin-top: 1px; }
 
     /* SAH client stepper (revealed when SAH is enabled) */
     .sah-stepper-wrap {
       background: #f0fdf4; border: 1px solid #bbf7d0;
-      border-radius: 8px; padding: 10px 11px;
-      margin-top: 4px; margin-bottom: 6px;
+      border-radius: 7px; padding: 7px 10px;
+      margin-top: 2px;
       transition: all 0.2s;
     }
     .sah-stepper-label {
-      font-size: 10.5px; font-weight: 600; color: #374151; margin-bottom: 7px;
+      font-size: 10px; font-weight: 600; color: #374151; margin-bottom: 5px;
     }
 
     /* Addon list gap */
-    .addon-list { display: flex; flex-direction: column; gap: 6px; }
+    .addon-list { display: flex; flex-direction: column; gap: 4px; }
 
     /* Addons footer note */
     .addon-footer-note {
@@ -557,7 +554,6 @@
               <!-- LMS -->
               <div class="addon-card" id="addon-lms" onclick="toggleAddon('lms')">
                 <div class="addon-check-box" id="check-lms"><span class="addon-check-mark">✓</span></div>
-                <div class="addon-icon">🎓</div>
                 <div class="addon-body">
                   <div class="addon-name">ShiftCare Learning LMS</div>
                   <div class="addon-desc">Online learning &amp; compliance training for your workforce</div>
@@ -570,7 +566,6 @@
               <!-- HR -->
               <div class="addon-card" id="addon-hr" onclick="toggleAddon('hr')">
                 <div class="addon-check-box" id="check-hr"><span class="addon-check-mark">✓</span></div>
-                <div class="addon-icon">👥</div>
                 <div class="addon-body">
                   <div class="addon-name">ShiftCare HR</div>
                   <div class="addon-desc">HR management, onboarding &amp; document workflows</div>
@@ -583,7 +578,6 @@
               <!-- Support at Home -->
               <div class="addon-card" id="addon-sah" onclick="toggleAddon('sah')">
                 <div class="addon-check-box" id="check-sah"><span class="addon-check-mark">✓</span></div>
-                <div class="addon-icon">🏠</div>
                 <div class="addon-body">
                   <div class="addon-name">Support at Home</div>
                   <div class="addon-desc">CHSP &amp; Home Care Package management</div>
@@ -597,13 +591,13 @@
               <div class="sah-stepper-wrap" id="sah-stepper" style="display:none">
                 <div class="sah-stepper-label">Active clients for Support at Home</div>
                 <div class="stepper-row">
-                  <div class="stepper">
-                    <button id="sah-minus" onclick="adjSah(-1); event.stopPropagation();" disabled>−</button>
-                    <div class="count-val" id="sah-count-val">5</div>
-                    <button onclick="adjSah(1); event.stopPropagation();">+</button>
+                  <div class="stepper" style="border-radius:6px;">
+                    <button id="sah-minus" onclick="adjSah(-1); event.stopPropagation();" disabled style="width:26px;height:26px;font-size:16px;">−</button>
+                    <div class="count-val" id="sah-count-val" style="width:32px;height:26px;font-size:13px;">5</div>
+                    <button onclick="adjSah(1); event.stopPropagation();" style="width:26px;height:26px;font-size:16px;">+</button>
                   </div>
                   <div class="stepper-meta">
-                    <div class="stepper-rate">$3.00 / client / mo</div>
+                    <div class="stepper-rate" style="font-size:11px;">$3.00 / client / mo</div>
                     <div class="stepper-note" id="sah-cost-note">$15.00 / mo</div>
                   </div>
                 </div>
@@ -612,7 +606,6 @@
               <!-- Shift Costing -->
               <div class="addon-card" id="addon-costing" onclick="toggleAddon('costing')">
                 <div class="addon-check-box" id="check-costing"><span class="addon-check-mark">✓</span></div>
-                <div class="addon-icon">💰</div>
                 <div class="addon-body">
                   <div class="addon-name">Shift Costing</div>
                   <div class="addon-desc">Real-time shift cost forecasting &amp; reporting</div>
@@ -968,3 +961,4 @@ update();
 </script>
 </body>
 </html>
+                                                                                               
