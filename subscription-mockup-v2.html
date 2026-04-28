@@ -555,7 +555,7 @@
               <div class="addon-card" id="addon-lms" onclick="toggleAddon('lms')">
                 <div class="addon-check-box" id="check-lms"><span class="addon-check-mark">✓</span></div>
                 <div class="addon-body">
-                  <div class="addon-name">ShiftCare Learning LMS</div>
+                  <div class="addon-name">ShiftCare Learning</div>
                   <div class="addon-desc">Online learning &amp; compliance training for your workforce</div>
                 </div>
                 <div class="addon-price-col">
@@ -689,15 +689,16 @@
               </div>
             </div>
 
+            <!-- CTA — sits directly below the total, above plan inclusions -->
+            <div class="cta-wrap" style="margin-top:12px;">
+              <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
+              <p class="no-lock">No lock-in &nbsp;·&nbsp; No setup fees</p>
+            </div>
+
             <div class="divider"></div>
 
             <div class="inclusions-title" id="feat-title">Premium includes</div>
             <div class="inclusions-list" id="feat-list"></div>
-
-            <div class="cta-wrap">
-              <button class="cta-btn" id="cta-btn">Buy Premium plan</button>
-              <p class="no-lock">No lock-in &nbsp;·&nbsp; No setup fees</p>
-            </div>
 
           </div><!-- /.col-summary -->
 
@@ -742,7 +743,7 @@ const PLANS = {
 
 // Add-on definitions (staff billing only)
 const ADDONS = [
-  { id: 'lms',     name: 'ShiftCare Learning LMS', price: 3, unit: 'staff'  },
+  { id: 'lms',     name: 'ShiftCare Learning', price: 3, unit: 'staff'  },
   { id: 'hr',      name: 'ShiftCare HR',            price: 2, unit: 'staff'  },
   { id: 'sah',     name: 'Support at Home',          price: 3, unit: 'client' },
   { id: 'costing', name: 'Shift Costing',            price: 2, unit: 'staff'  },
@@ -951,6 +952,4 @@ function update() {
   if (addonLines.length > 0) {
     addonSection.style.display = '';
     addonSummaryRows.innerHTML = addonLines.map(a => {
-      const detail = annual
-        ? `${a.qty} × $${a.price} × 12 mo`
-        : `${a.qty} × $${a.price} 
+      con
