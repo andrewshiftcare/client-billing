@@ -611,7 +611,7 @@
                   <div class="addon-desc">Real-time shift cost forecasting &amp; reporting</div>
                 </div>
                 <div class="addon-price-col">
-                  <div class="addon-price">$2<span>/staff/mo</span></div>
+                  <div class="addon-price">$2.50<span>/staff/mo</span></div>
                 </div>
               </div>
 
@@ -746,7 +746,7 @@ const ADDONS = [
   { id: 'lms',     name: 'ShiftCare Learning', price: 3, unit: 'staff'  },
   { id: 'hr',      name: 'ShiftCare HR',            price: 2, unit: 'staff'  },
   { id: 'sah',     name: 'Support at Home',          price: 3, unit: 'client' },
-  { id: 'costing', name: 'Shift Costing',            price: 2, unit: 'staff'  },
+  { id: 'costing', name: 'Shift Costing',            price: 2.5, unit: 'staff'  },
 ];
 
 const MIN = 5;
@@ -759,7 +759,10 @@ function fmt(n) {
 }
 
 function fmtRound(n) {
-  return '$' + Math.round(n).toLocaleString('en-AU');
+  if (n % 1 === 0) {
+    return '$' + n.toLocaleString('en-AU');
+  }
+  return '$' + n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function setMode(m) {
