@@ -275,7 +275,7 @@
 
     .addon-body { flex: 1; min-width: 0; }
     .addon-name { font-size: 11.5px; font-weight: 650; color: #0f172a; line-height: 1.3; }
-    .addon-desc { font-size: 10px; color: #94a3b8; margin-top: 1px; line-height: 1.3; }
+    .addon-desc { font-size: 10px; color: #94a3b8; margin-top: 1px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .addon-price-col { text-align: right; flex-shrink: 0; }
     .addon-price { font-size: 13px; font-weight: 800; color: #0f172a; line-height: 1; }
@@ -919,23 +919,23 @@ function update() {
   document.getElementById('os-count-val').textContent   = countValStr;
 
   // ── Add-on costs (staff billing only) ──
-  // When annual: each addon is charged for 12 months (annual commitment)
+  // When annual billing: each addon is billed for 12 months upfront
   let addonTotal = 0;
   const addonLines = [];
 
   if (showAddons) {
     ADDONS.forEach(a => {
       if (!addonEnabled[a.id]) return;
-      const qty        = a.unit === 'staff' ? count : sahCount;
+      const qty         = a.unit === 'staff' ? count : sahCount;
       const monthlyCost = a.price * qty;
-      const cost       = annual ? monthlyCost * 12 : monthlyCost;
+      const cost        = annual ? monthlyCost * 12 : monthlyCost;
       addonTotal += cost;
       addonLines.push({ name: a.name, qty, unit: a.unit, price: a.price, monthlyCost, cost });
     });
   }
 
   // ── Totals ──
-  // Plan total is always the monthly-equivalent amount; for annual, multiply by 12 for the true annual charge
+  // Plan monthly equivalent x12 gives the annual plan charge
   const planPeriodTotal = annual ? planTotal * 12 : planTotal;
   const grandTotal      = planPeriodTotal + addonTotal;
   const periodSuffix    = annual ? '/yr' : '/mo';
@@ -951,5 +951,34 @@ function update() {
 
   if (addonLines.length > 0) {
     addonSection.style.display = '';
-    addonSummaryRows.innerHTML = addonLines.map(a => {
-      con
+    addonSummaryRows.innerHTML = addonLines.map(function(a) {
+      var detail = annual
+        ? (a.qty + ' × $' + a.price + ' × 12 mo')
+        : (a.qty + ' × $' + a.price + ' / ' + a.unit);
+      return '<div class="sum-row addon-sum-row">'
+        + '<span class="sum-lbl">' + a.name + '<br>'
+        + '<span style="font-size:10px;color:#94a3b8">' + detail + '</span></span>'
+        + '<span class="sum-val accent">' + fmtRound(a.cost) + periodSuffix + '</span>'
+        + '</div>';
+    }).join('');
+  } else {
+    addonSection.style.display = 'none';
+  }
+
+  // ── Breakdown in total card (shown when addons active) ──
+  var breakdown = document.getElementById('total-breakdown');
+  if (addonLines.length > 0) {
+    breakdown.style.display = '';
+    document.getElementById('bd-plan').textContent   = fmtRound(planPeriodTotal) + periodSuffix;
+    document.getElementById('bd-addons').textContent = fmtRound(addonTotal) + periodSuffix;
+    document.getElementById('bd-total').textContent  = fmtRound(grandTotal) + periodSuffix;
+  } else {
+    breakdown.style.display = 'none';
+  }
+}
+
+update();
+</script>
+</body>
+</html>
+                                                                                               
